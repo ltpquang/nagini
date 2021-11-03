@@ -1,13 +1,33 @@
 import React from "react";
-import {Button, FloatingLabel, Form} from "react-bootstrap";
+import {Badge, Button, FloatingLabel, Form, Row} from "react-bootstrap";
 
 class Main extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    this.props = {
-
+    this.state = {
+      nodeCount: 0,
     }
+  }
+
+  handleClick() {
+    this.setState({
+      nodeCount: this.state.nodeCount + 1,
+    })
+  }
+
+  renderNodes() {
+    let result = [];
+    for (let i = 0; i < this.state.nodeCount; i++) {
+      result.push(this.renderNode(i));
+    }
+    return result
+  }
+
+  renderNode(index) {
+    return <Row>
+      <Badge bg="primary">Num {index}</Badge>
+    </Row>
   }
 
   render() {
@@ -16,17 +36,19 @@ class Main extends React.Component {
         <Form.Control
             as="textarea"
             placeholder="Paste"
-            style={{ height: '100px' }}
+            style={{height: '100px'}}
         />
       </FloatingLabel>
 
-      <Button>Click</Button>
+      {this.renderNodes()}
+
+      <Button onClick={() => this.handleClick()}>Click</Button>
 
       <FloatingLabel controlId="outputTextArea" label="Output">
         <Form.Control
             as="textarea"
             placeholder="Paste"
-            style={{ height: '100px' }}
+            style={{height: '100px'}}
         />
       </FloatingLabel>
     </div>
