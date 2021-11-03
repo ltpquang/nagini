@@ -7,12 +7,14 @@ class Main extends React.Component {
     super(props, context);
     this.state = {
       nodeCount: 0,
+      output: null,
     }
   }
 
   handleClick() {
     this.setState({
       nodeCount: this.state.nodeCount + 1,
+      output: this.state.nodeCount
     })
   }
 
@@ -49,6 +51,7 @@ class Main extends React.Component {
             as="textarea"
             placeholder="Paste"
             style={{height: '100px'}}
+            value={this.state.output}
         />
       </FloatingLabel>
     </div>
