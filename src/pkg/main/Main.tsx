@@ -1,5 +1,6 @@
 import React from "react";
 import {Badge, Button, FloatingLabel, Form, Row} from "react-bootstrap";
+import BaseTransformer from "../transformers/BaseTransformer";
 
 interface Props {
 }
@@ -7,6 +8,7 @@ interface Props {
 interface State {
   nodeCount: number;
   output?: string;
+  transformers: BaseTransformer[];
 }
 
 class Main extends React.Component<Props, State> {
@@ -14,6 +16,7 @@ class Main extends React.Component<Props, State> {
     super(props, context);
     this.state = {
       nodeCount: 0,
+      transformers: [],
     };
   }
 
@@ -21,7 +24,13 @@ class Main extends React.Component<Props, State> {
     this.setState({
       nodeCount: this.state.nodeCount + 1,
       output: this.state.nodeCount.toString()
-    })
+    });
+  }
+
+  handleInputChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    this.setState({
+      output: event.currentTarget.value
+    });
   }
 
   renderNodes() {
@@ -45,6 +54,7 @@ class Main extends React.Component<Props, State> {
             as="textarea"
             placeholder="Paste"
             style={{height: '100px'}}
+            onChange={(event) => this.handleInputChange(event)}
         />
       </FloatingLabel>
 
