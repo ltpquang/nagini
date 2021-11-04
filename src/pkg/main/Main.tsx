@@ -1,11 +1,13 @@
 import React from "react";
-import {
-  Accordion,
-  Button, FloatingLabel,
-  Form
-} from "react-bootstrap";
+import {Accordion, Dropdown, DropdownButton, FloatingLabel, Form} from "react-bootstrap";
 import BaseTransformer from "../transformers/BaseTransformer";
 import NoOps from "../transformers/NoOps";
+import Unescape from "../transformers/Unescape";
+
+let supportedNode: Map<string, () => BaseTransformer> = new Map([
+  ["noops", () => new NoOps()],
+  ["unescape", () => new Unescape()]
+])
 
 interface Props {
 }
@@ -25,9 +27,9 @@ class Main extends React.Component<Props, State> {
     };
   }
 
-  handleClick() {
+  addTransformer(input: BaseTransformer) {
     this.setState({
-      transformers: [...this.state.transformers, new NoOps()]
+      transformers: [...this.state.transformers, input]
     });
     this.setState({
       expandedIndex: this.state.transformers.length - 1
@@ -44,7 +46,23 @@ class Main extends React.Component<Props, State> {
     return this.state.transformers.map((trans, index, _a) => trans.render(index))
   }
 
+  renderSupportedNodes(): JSX.Element[] {
+    let result: JSX.Element[] = []
+    supportedNode.forEach((value, key, _) => result.push(
+        <Dropdown.Item as="button" eventKey={key}>{key}</Dropdown.Item>));
+    return result
+  }
 
+  handleAddNode(eventKey: string | null) {
+    if (eventKey == null) {
+      return
+    }
+    let maker = supportedNode.get(eventKey)
+    if (!maker) {
+      return
+    }
+    this.addTransformer(maker())
+  }
 
   render() {
     return <div className="Main">
@@ -61,7 +79,10 @@ class Main extends React.Component<Props, State> {
         {this.renderNodes()}
       </Accordion>
 
-      <Button onClick={() => this.handleClick()}>Click</Button>
+      <DropdownButton id="dropdown-item-button" title="Add node"
+                      onSelect={(eventKey) => this.handleAddNode(eventKey)}>
+        {this.renderSupportedNodes()}
+      </DropdownButton>
 
       <FloatingLabel controlId="outputTextArea" label="Output">
         <Form.Control
@@ -71,7 +92,7 @@ class Main extends React.Component<Props, State> {
             value={this.state.output}
         />
       </FloatingLabel>
-    </div>
+    </div>;
   }
 }
 
