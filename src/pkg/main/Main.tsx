@@ -1,12 +1,12 @@
 import React from "react";
-import {Badge, Button, FloatingLabel, Form, Row} from "react-bootstrap";
+import {Button, FloatingLabel, Form} from "react-bootstrap";
 import BaseTransformer from "../transformers/BaseTransformer";
+import NoOps from "../transformers/NoOps";
 
 interface Props {
 }
 
 interface State {
-  nodeCount: number;
   output?: string;
   transformers: BaseTransformer[];
 }
@@ -15,15 +15,13 @@ class Main extends React.Component<Props, State> {
   constructor(props: Props, context: any) {
     super(props, context);
     this.state = {
-      nodeCount: 0,
       transformers: [],
     };
   }
 
-   handleClick() {
+  handleClick() {
     this.setState({
-      nodeCount: this.state.nodeCount + 1,
-      output: this.state.nodeCount.toString()
+      transformers: [...this.state.transformers, new NoOps()]
     });
   }
 
@@ -34,18 +32,9 @@ class Main extends React.Component<Props, State> {
   }
 
   renderNodes() {
-    let result = [];
-    for (let i = 0; i < this.state.nodeCount; i++) {
-      result.push(this.renderNode(i));
-    }
-    return result
+    return this.state.transformers.map((trans, _i, _a) => trans.render())
   }
 
-  renderNode(index: number) {
-    return <Row>
-      <Badge bg="primary">Num {index}</Badge>
-    </Row>
-  }
 
   render() {
     return <div className="Main">
