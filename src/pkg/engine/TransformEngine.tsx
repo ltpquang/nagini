@@ -46,7 +46,10 @@ class TransformEngine extends React.Component<Props, State>{
   renderSupportedNodes(): JSX.Element[] {
     let result: JSX.Element[] = []
     Transformer.all().forEach((value, key, _) => result.push(
-        <Dropdown.Item as="button" eventKey={key}>{value.name}</Dropdown.Item>));
+        <Dropdown.Item
+            as="button"
+            key={key}
+            eventKey={key}>{value.make().name()}</Dropdown.Item>));
     return result
   }
 

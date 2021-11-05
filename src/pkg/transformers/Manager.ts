@@ -5,18 +5,16 @@ import Unescape from "./Unescape";
 type CreateTransformerFunction = () => BaseTransformer;
 
 class Transformer {
-  name: string
   make: CreateTransformerFunction
 
-  constructor(name: string, make: CreateTransformerFunction) {
-    this.name = name;
+  constructor(make: CreateTransformerFunction) {
     this.make = make;
   }
 
 
   private static allTransformers: Map<string, Transformer> = new Map<string, Transformer>([
-    ["noops", new Transformer("No ops", () => new NoOps())],
-    ["unescape", new Transformer("Unescape", () => new Unescape())]
+    ["noops", new Transformer(() => new NoOps())],
+    ["unescape", new Transformer(() => new Unescape())]
   ])
 
 

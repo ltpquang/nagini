@@ -6,7 +6,7 @@ class NoOps extends BaseTransformer {
   }
 
   name(): string {
-    return "NoOps";
+    return "No ops";
   }
 }
 
