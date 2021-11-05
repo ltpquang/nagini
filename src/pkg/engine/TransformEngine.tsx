@@ -1,14 +1,7 @@
 import React from "react";
 import {Accordion, Dropdown, DropdownButton} from "react-bootstrap";
 import BaseTransformer from "../transformers/BaseTransformer";
-import NoOps from "../transformers/NoOps";
-import Unescape from "../transformers/Unescape";
-
-
-let supportedNode: Map<string, () => BaseTransformer> = new Map([
-  ["noops", () => new NoOps()],
-  ["unescape", () => new Unescape()]
-])
+import Transformer from "../transformers/Manager";
 
 interface Props {
 
@@ -36,11 +29,13 @@ class TransformEngine extends React.Component<Props, State>{
     if (eventKey == null) {
       return
     }
-    let maker = supportedNode.get(eventKey)
-    if (!maker) {
+
+    let transformer = Transformer.forName(eventKey)
+    if (!transformer) {
       return
     }
-    this.addTransformer(maker())
+
+    this.addTransformer(transformer.make())
   }
 
 
@@ -50,8 +45,8 @@ class TransformEngine extends React.Component<Props, State>{
 
   renderSupportedNodes(): JSX.Element[] {
     let result: JSX.Element[] = []
-    supportedNode.forEach((value, key, _) => result.push(
-        <Dropdown.Item as="button" eventKey={key}>{key}</Dropdown.Item>));
+    Transformer.all().forEach((value, key, _) => result.push(
+        <Dropdown.Item as="button" eventKey={key}>{value.name}</Dropdown.Item>));
     return result
   }
 
