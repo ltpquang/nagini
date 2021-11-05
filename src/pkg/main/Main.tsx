@@ -1,5 +1,5 @@
 import React from "react";
-import {FloatingLabel, Form} from "react-bootstrap";
+import {Col, FloatingLabel, Form, Row} from "react-bootstrap";
 import TransformEngine from "../engine/TransformEngine";
 
 interface Props {
@@ -23,23 +23,35 @@ class Main extends React.Component<Props, State> {
 
   render = () =>
       <div className="Main">
-        <FloatingLabel controlId="inputTextArea" label="Input">
-          <Form.Control
-              as="textarea"
-              placeholder="Paste"
-              style={{height: '100px'}}
-              onChange={(event) => this.handleInputChange(event)}
-          />
-        </FloatingLabel>
-        <TransformEngine/>
-        <FloatingLabel controlId="outputTextArea" label="Output">
-          <Form.Control
-              as="textarea"
-              placeholder="Paste"
-              style={{height: '100px'}}
-              value={this.state.output}
-          />
-        </FloatingLabel>
+        <Row>
+          <Col md={{ span: 8, offset: 2 }}>
+            <FloatingLabel controlId="inputTextArea" label="Input">
+              <Form.Control
+                  as="textarea"
+                  placeholder="Paste"
+                  style={{height: '100px'}}
+                  onChange={(event) => this.handleInputChange(event)}
+              />
+            </FloatingLabel>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={{ span: 6, offset: 3 }}>
+            <TransformEngine/>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={{ span: 8, offset: 2 }}>
+            <FloatingLabel controlId="outputTextArea" label="Output">
+              <Form.Control
+                  as="textarea"
+                  placeholder="Paste"
+                  style={{height: '100px'}}
+                  value={this.state.output}
+              />
+            </FloatingLabel>
+          </Col>
+        </Row>
       </div>;
 }
 
