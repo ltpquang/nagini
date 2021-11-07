@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import {Col, FloatingLabel, Form, Row} from "react-bootstrap";
 import TransformEngine from "../engine/TransformEngine";
 
@@ -8,13 +8,25 @@ export const Main = () => {
 
   const [output, setOutput] = useState<string>("");
 
-  useEffect(() => {
+  const computeOutput = useCallback(() => {
     let result = input;
+    console.log("before chain result", result)
     if (engineRef.current) {
       result = engineRef.current.transform(result)
+      console.log("result", result)
     }
+    console.log("after chain result", result)
     setOutput(result)
   }, [input, engineRef])
+
+  useEffect(() => {
+    computeOutput()
+  }, [computeOutput])
+
+  const handleTransformEngineOnChange = (engine: TransformEngine) => {
+    console.log("receive on change")
+    computeOutput()
+  }
 
   return (
       <div className="Main">
@@ -32,7 +44,9 @@ export const Main = () => {
         </Row>
         <Row>
           <Col md={{span: 6, offset: 3}}>
-            <TransformEngine ref={engineRef} />
+            <TransformEngine
+                ref={engineRef}
+                onChange={handleTransformEngineOnChange}/>
           </Col>
         </Row>
         <Row>
@@ -43,6 +57,7 @@ export const Main = () => {
                   placeholder="Paste"
                   style={{height: '100px'}}
                   value={output}
+                  readOnly={true}
               />
             </FloatingLabel>
           </Col>

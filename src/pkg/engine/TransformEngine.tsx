@@ -2,10 +2,9 @@ import React from "react";
 import {Accordion, Dropdown, DropdownButton} from "react-bootstrap";
 import BaseTransformer from "../transformers/BaseTransformer";
 import Transformer from "../transformers/Manager";
-import {forEach} from "react-bootstrap/ElementChildren";
 
 interface Props {
-  onNodesChanged?: (engine: TransformEngine) => void
+  onChange?: (engine: TransformEngine) => void
 }
 
 interface State {
@@ -37,6 +36,11 @@ class TransformEngine extends React.Component<Props, State>{
     }
 
     this.addTransformer(transformer.make())
+
+    if (this.props.onChange) {
+      console.log("call on change")
+      this.props.onChange(this)
+    }
   }
 
   transform(input: string): string {
