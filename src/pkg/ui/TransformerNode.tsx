@@ -1,25 +1,19 @@
 import {Accordion} from "react-bootstrap";
 import React from "react";
+import {Transformer} from "../transformers/Transformer";
 
-class BaseTransformer {
-  process(input: string): string {
-    throw new Error("Not implemented");
-  }
+interface Props {
+  index: number
+  transformer: Transformer
+}
 
-  name(): string {
-    throw new Error("Not implemented");
-  }
-
-  buttonOnClick(event: React.MouseEvent<HTMLButtonElement>) {
-    event.stopPropagation();
-  }
-
-  render = (index: number) =>
+export const TransformerNode = ({index, transformer}: Props) => {
+  return (
       <Accordion.Item
           key={index.toString()}
           eventKey={index.toString()}>
         <Accordion.Header>
-          {this.name()}
+          {transformer.name()}
         </Accordion.Header>
         <Accordion.Body>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -30,7 +24,6 @@ class BaseTransformer {
           cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
           est laborum.
         </Accordion.Body>
-      </Accordion.Item>;
+      </Accordion.Item>
+  );
 }
-
-export default BaseTransformer

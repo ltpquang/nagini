@@ -1,6 +1,6 @@
 import {Container} from 'react-bootstrap';
 import './App.css';
-import Main from "./pkg/main/Main";
+import Main from "./pkg/ui/Main";
 
 const App = () => (
     <div className="App">

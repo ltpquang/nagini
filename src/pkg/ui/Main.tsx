@@ -1,32 +1,16 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Col, FloatingLabel, Form, Row} from "react-bootstrap";
 import TransformEngine from "../engine/TransformEngine";
+import TransformEngineComponent from "./TransformEngineComponent";
 
 export const Main = () => {
   const [input, setInput] = useState<string>("");
-  const engineRef = useRef<TransformEngine>(null)
-
+  const [engine, setEngine] = useState<TransformEngine>(new TransformEngine());
   const [output, setOutput] = useState<string>("");
 
-  const computeOutput = useCallback(() => {
-    let result = input;
-    console.log("before chain result", result)
-    if (engineRef.current) {
-      result = engineRef.current.transform(result)
-      console.log("result", result)
-    }
-    console.log("after chain result", result)
-    setOutput(result)
-  }, [input, engineRef])
-
   useEffect(() => {
-    computeOutput()
-  }, [computeOutput])
-
-  const handleTransformEngineOnChange = (engine: TransformEngine) => {
-    console.log("receive on change")
-    computeOutput()
-  }
+    setOutput(engine.transformData(input))
+  }, [engine, input])
 
   return (
       <div className="Main">
@@ -37,16 +21,17 @@ export const Main = () => {
                   as="textarea"
                   placeholder="Paste"
                   style={{height: '100px'}}
-                  onChange={(event) => {setInput(event.currentTarget.value)}}
+                  onChange={(event) => {
+                    setInput(event.currentTarget.value)
+                  }}
               />
             </FloatingLabel>
           </Col>
         </Row>
         <Row>
           <Col md={{span: 6, offset: 3}}>
-            <TransformEngine
-                ref={engineRef}
-                onChange={handleTransformEngineOnChange}/>
+            <TransformEngineComponent
+                onChange={setEngine}/>
           </Col>
         </Row>
         <Row>
