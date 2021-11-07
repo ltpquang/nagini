@@ -1,13 +1,11 @@
 import {Transformer} from "./Transformer";
 
-class Unescape implements Transformer {
+export default class Unescape implements Transformer {
   transformData(input: string): string {
-    return input + " unescape";
+    return unescape(input);
   }
 
   name(): string {
     return "Unescape";
   }
 }
-
-export default Unescape

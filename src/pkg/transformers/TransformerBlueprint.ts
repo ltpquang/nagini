@@ -1,6 +1,6 @@
-import NoOps from "./NoOps";
 import Unescape from "./Unescape";
 import {Transformer} from "./Transformer";
+import JsonBeautify from "./JsonBeautify";
 
 type CreateTransformerFunction = () => Transformer;
 
@@ -12,8 +12,8 @@ export default class TransformerBlueprint {
   }
 
   private static allTransformers: Map<string, TransformerBlueprint> = new Map<string, TransformerBlueprint>([
-    ["noops", new TransformerBlueprint(() => new NoOps())],
-    ["unescape", new TransformerBlueprint(() => new Unescape())]
+    ["unescape", new TransformerBlueprint(() => new Unescape())],
+    ["jsonbeautify", new TransformerBlueprint(() => new JsonBeautify())]
   ])
 
   static forName(name: string): (TransformerBlueprint | undefined) {
