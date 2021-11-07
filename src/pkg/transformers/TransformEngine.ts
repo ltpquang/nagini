@@ -1,5 +1,4 @@
-import {Transformer} from "../transformers/Transformer";
-import {forEach} from "react-bootstrap/ElementChildren";
+import {Transformer} from "./Transformer";
 
 class TransformEngine implements Transformer {
   static clone(from: TransformEngine): TransformEngine {

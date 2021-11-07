@@ -1,7 +1,7 @@
-import TransformEngine from "../engine/TransformEngine";
+import TransformEngine from "../transformers/TransformEngine";
 import {Accordion, Dropdown, DropdownButton} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
-import TransformerMeta from "../transformers/TransformerMeta";
+import TransformerBlueprint from "../transformers/TransformerBlueprint";
 import {TransformerNode} from "./TransformerNode";
 
 interface Props {
@@ -22,7 +22,7 @@ const TransformEngineComponent = ({onChange}: Props) => {
       return
     }
 
-    let transformerMeta = TransformerMeta.forName(eventKey)
+    let transformerMeta = TransformerBlueprint.forName(eventKey)
     if (!transformerMeta) {
       return
     }
@@ -34,7 +34,7 @@ const TransformEngineComponent = ({onChange}: Props) => {
 
   const renderSupportedNodes = () => {
     let result: JSX.Element[] = []
-    TransformerMeta.all().forEach((value, key, _) => result.push(
+    TransformerBlueprint.all().forEach((value, key, _) => result.push(
         <Dropdown.Item
             as="button"
             key={key}
@@ -46,8 +46,10 @@ const TransformEngineComponent = ({onChange}: Props) => {
       <div>
         <Accordion>
           {
-            engine.transformers.map((transformer, index, _) =>
-            <TransformerNode index={index} transformer={transformer}/>
+            engine.transformers.map(
+                (transformer, index, _) =>
+                    <TransformerNode index={index}
+                                     transformer={transformer}/>
             )
           }
         </Accordion>
