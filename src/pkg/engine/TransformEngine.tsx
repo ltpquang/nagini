@@ -2,6 +2,7 @@ import React from "react";
 import {Accordion, Dropdown, DropdownButton} from "react-bootstrap";
 import BaseTransformer from "../transformers/BaseTransformer";
 import Transformer from "../transformers/Manager";
+import {forEach} from "react-bootstrap/ElementChildren";
 
 interface Props {
   onNodesChanged?: (engine: TransformEngine) => void
@@ -39,7 +40,11 @@ class TransformEngine extends React.Component<Props, State>{
   }
 
   transform(input: string): string {
-    return input + " engine"
+    let result = input
+    this.state.transformers.forEach((trans, index, _a) => {
+      result = trans.process(result)
+    })
+    return result
   }
 
 

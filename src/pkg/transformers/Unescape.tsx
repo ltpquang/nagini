@@ -2,7 +2,7 @@ import BaseTransformer from "./BaseTransformer";
 
 class Unescape extends BaseTransformer {
   process(input: string): string {
-    return input + "unescape";
+    return input + " unescape";
   }
 
   name(): string {
