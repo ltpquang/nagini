@@ -4,7 +4,7 @@ import BaseTransformer from "../transformers/BaseTransformer";
 import Transformer from "../transformers/Manager";
 
 interface Props {
-
+  onNodesChanged?: (engine: TransformEngine) => void
 }
 
 interface State {
@@ -36,6 +36,10 @@ class TransformEngine extends React.Component<Props, State>{
     }
 
     this.addTransformer(transformer.make())
+  }
+
+  transform(input: string): string {
+    return input
   }
 
 

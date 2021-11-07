@@ -1,58 +1,51 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Col, FloatingLabel, Form, Row} from "react-bootstrap";
 import TransformEngine from "../engine/TransformEngine";
 
-interface Props {
-}
+export const Main = () => {
+  const [input, setInput] = useState<string>("");
+  // const [engine, setEngine] = useState<TransformEngine>(null);
 
-interface State {
-  output?: string;
-}
+  const [output, setOutput] = useState<string>("");
 
-class Main extends React.Component<Props, State> {
-  constructor(props: Props, context: any) {
-    super(props, context);
-    this.state = {};
-  }
+  useEffect(() => {
+    setOutput(input)
+  }, [input])
 
-  handleInputChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    this.setState({
-      output: event.currentTarget.value
-    });
-  }
-
-  render = () =>
+  return (
       <div className="Main">
         <Row>
-          <Col md={{ span: 8, offset: 2 }}>
+          <Col md={{span: 8, offset: 2}}>
             <FloatingLabel controlId="inputTextArea" label="Input">
               <Form.Control
                   as="textarea"
                   placeholder="Paste"
                   style={{height: '100px'}}
-                  onChange={(event) => this.handleInputChange(event)}
+                  onChange={(event) => {setInput(event.currentTarget.value)}}
               />
             </FloatingLabel>
           </Col>
         </Row>
         <Row>
-          <Col md={{ span: 6, offset: 3 }}>
-            <TransformEngine/>
+          <Col md={{span: 6, offset: 3}}>
+            <TransformEngine />
           </Col>
         </Row>
         <Row>
-          <Col md={{ span: 8, offset: 2 }}>
+          <Col md={{span: 8, offset: 2}}>
             <FloatingLabel controlId="outputTextArea" label="Output">
               <Form.Control
                   as="textarea"
                   placeholder="Paste"
                   style={{height: '100px'}}
-                  value={this.state.output}
+                  value={output}
               />
             </FloatingLabel>
           </Col>
         </Row>
-      </div>;
+      </div>
+  )
 }
 
 export default Main
+
