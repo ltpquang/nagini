@@ -49,6 +49,7 @@ const TransformEngineComponent = ({onChange}: Props) => {
             engine.transformers.map(
                 (transformer, index, _) =>
                     <TransformerNode index={index}
+                                     key={index.toString()}
                                      transformer={transformer}/>
             )
           }
