@@ -1,16 +1,20 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Col, FloatingLabel, Form, Row} from "react-bootstrap";
 import TransformEngine from "../engine/TransformEngine";
 
 export const Main = () => {
   const [input, setInput] = useState<string>("");
-  // const [engine, setEngine] = useState<TransformEngine>(null);
+  const engineRef = useRef<TransformEngine>(null)
 
   const [output, setOutput] = useState<string>("");
 
   useEffect(() => {
-    setOutput(input)
-  }, [input])
+    let result = input;
+    if (engineRef.current) {
+      result = engineRef.current.transform(result)
+    }
+    setOutput(result)
+  }, [input, engineRef])
 
   return (
       <div className="Main">
@@ -28,7 +32,7 @@ export const Main = () => {
         </Row>
         <Row>
           <Col md={{span: 6, offset: 3}}>
-            <TransformEngine />
+            <TransformEngine ref={engineRef} />
           </Col>
         </Row>
         <Row>
