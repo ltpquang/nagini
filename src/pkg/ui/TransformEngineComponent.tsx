@@ -8,7 +8,6 @@ interface Props {
   onChange?: (engine: TransformEngine) => void
 }
 
-
 const TransformEngineComponent = ({onChange}: Props) => {
   const [engine, setEngine] = useState(new TransformEngine())
 
@@ -16,10 +15,10 @@ const TransformEngineComponent = ({onChange}: Props) => {
     if (onChange) {
       onChange(engine)
     }
-  }, [onChange, engine])
+  }, [engine, onChange])
 
   const handleAddTransformer = (eventKey: string | null) => {
-    if (eventKey == null) {
+    if (!eventKey) {
       return
     }
 
@@ -30,7 +29,7 @@ const TransformEngineComponent = ({onChange}: Props) => {
 
     engine.addTransformer(transformerMeta.newInstance())
 
-    setEngine(engine)
+    setEngine(prevState => TransformEngine.clone(prevState))
   }
 
   const renderSupportedNodes = () => {
