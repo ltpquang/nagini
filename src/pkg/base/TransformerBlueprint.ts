@@ -1,7 +1,7 @@
-import Unescape from "./Unescape";
+import Unescape from "../transformers/Unescape";
 import {Transformer} from "./Transformer";
-import JsonBeautify from "./JsonBeautify";
-import Replace from "./Replace";
+import JsonBeautify from "../transformers/JsonBeautify";
+import Replace from "../transformers/Replace";
 
 type CreateTransformerFunction = () => Transformer;
 

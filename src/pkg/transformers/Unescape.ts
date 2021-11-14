@@ -1,4 +1,4 @@
-import {Transformer} from "./Transformer";
+import {Transformer} from "../base/Transformer";
 
 export default class Unescape implements Transformer {
   transformData(input: string): string {

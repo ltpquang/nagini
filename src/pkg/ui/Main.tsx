@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Col, FloatingLabel, Form, Row} from "react-bootstrap";
-import TransformEngine from "../transformers/TransformEngine";
+import TransformEngine from "../base/TransformEngine";
 import TransformEngineComponent from "./TransformEngineComponent";
 
 export const Main = () => {

@@ -1,4 +1,4 @@
-import {Transformer} from "./Transformer";
+import {Transformer} from "../base/Transformer";
 
 export default class Replace implements Transformer {
   public old: string = "";

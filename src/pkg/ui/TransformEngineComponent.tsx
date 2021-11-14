@@ -1,7 +1,7 @@
-import TransformEngine from "../transformers/TransformEngine";
+import TransformEngine from "../base/TransformEngine";
 import {Accordion, Dropdown, DropdownButton} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
-import TransformerBlueprint from "../transformers/TransformerBlueprint";
+import TransformerBlueprint from "../base/TransformerBlueprint";
 import {TransformerNode} from "./TransformerNode";
 
 interface Props {

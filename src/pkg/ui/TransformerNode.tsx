@@ -1,6 +1,6 @@
 import {Accordion} from "react-bootstrap";
 import React from "react";
-import {Transformer} from "../transformers/Transformer";
+import {Transformer} from "../base/Transformer";
 import Replace from "../transformers/Replace";
 import { TransformerOptionsEmpty } from "./TransformerOptionsEmpty";
 import {TransformerOptionsReplace} from "./TransformerOptionsReplace";
