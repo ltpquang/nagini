@@ -16,6 +16,12 @@ class TransformEngine implements StringTransformer {
     this._transformers.push(input)
   }
 
+  replaceTransformer(index: number, input: StringTransformer) {
+    if (this._transformers[index]) {
+      this._transformers[index] = input
+    }
+  }
+
   transformData(input: string): string {
     let result = input
     this.transformers.forEach((trans, index, _a) => {

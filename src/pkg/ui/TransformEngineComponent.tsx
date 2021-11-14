@@ -33,6 +33,12 @@ const TransformEngineComponent = ({onChange}: Props) => {
     setEngine(prevState => TransformEngine.clone(prevState))
   }
 
+  function handleChangeTransformer(index: number, transformer: StringTransformer) {
+    engine.replaceTransformer(index, transformer)
+
+    setEngine(prevState => TransformEngine.clone(prevState))
+  }
+
   const renderSupportedNodes = () => {
     let result: JSX.Element[] = []
     TransformerBlueprint.all().forEach((value, key, _) => result.push(
@@ -41,10 +47,6 @@ const TransformEngineComponent = ({onChange}: Props) => {
             key={key}
             eventKey={key}>{value.newInstance().name()}</Dropdown.Item>));
     return result
-  }
-
-  function handleOnChange(index: number, transformer: StringTransformer) {
-    console.log(index, transformer)
   }
 
   return (
@@ -56,7 +58,7 @@ const TransformEngineComponent = ({onChange}: Props) => {
                     <TransformerNode index={index}
                                      key={index.toString()}
                                      transformer={transformer}
-                                     onChange={(index, updated) => handleOnChange(index, updated)}
+                                     onChange={(index, updated) => handleChangeTransformer(index, updated)}
                     />
             )
           }
