@@ -4,13 +4,17 @@ import React, {useEffect, useState} from "react";
 
 interface Props {
   transformer: Replace
+  onChange?: (updated: Replace) => void
 }
 
-export const TransformerOptionsReplace = ({transformer}: Props) => {
+export const TransformerOptionsReplace = ({transformer, onChange}: Props) => {
   const [replacer, setReplacer] = useState<Partial<Replace>>(transformer)
   useEffect(() => {
     console.log(replacer)
-  }, [replacer])
+    if (onChange) {
+      onChange(Replace.fromPartial(replacer))
+    }
+  }, [onChange, replacer])
 
   return (
       <div>

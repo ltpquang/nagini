@@ -20,4 +20,12 @@ export default class Replace implements Transformer {
       return input.replaceAll(this.old, this.new)
     }
   }
+
+  static fromPartial(p: Partial<Replace>): Replace {
+    let result = new Replace()
+    result.old = p.old ?? ""
+    result.new = p.new ?? ""
+    result.useRegEx = p.useRegEx ?? false
+    return result
+  }
 }
