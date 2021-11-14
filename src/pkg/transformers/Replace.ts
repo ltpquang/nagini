@@ -15,7 +15,14 @@ export default class Replace implements StringTransformer {
     }
 
     if (this.useRegEx) {
-      return input.replaceAll(new RegExp(this.old), this.new)
+      try {
+        return input.replaceAll(new RegExp(this.old, 'g'), this.new)
+      } catch (e: unknown) {
+        if (e instanceof TypeError) {
+          return "Invalid RegEx"
+        }
+        return (e as Error).message
+      }
     } else {
       return input.replaceAll(this.old, this.new)
     }

@@ -15,6 +15,20 @@ const testCases = new Array<TestCase>(
       useRegex: false,
       from: "hi there i want to replace this string",
       expected: "ha there a want to replace thas strang"
+    },
+    {
+      replace: 'i',
+      by: "a",
+      useRegex: true,
+      from: "hi there i want to replace this string",
+      expected: "ha there a want to replace thas strang"
+    },
+    {
+      replace: '\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3} - - \\[\\d+/Nov/2021:\\d+:\\d+:\\d+ \\+0000\\]',
+      by: "",
+      useRegex: true,
+      from: "112.72.95.132 - - [14/Nov/2021:15:03:51 +0000] GET",
+      expected: " GET"
     }
 )
 
