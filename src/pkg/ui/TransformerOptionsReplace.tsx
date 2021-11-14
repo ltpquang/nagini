@@ -26,9 +26,11 @@ export const TransformerOptionsReplace = ({transformer, onChange}: Props) => {
             <Dropdown.Item eventKey="text">text</Dropdown.Item>
             <Dropdown.Item eventKey="regex">regex</Dropdown.Item>
           </DropdownButton>
+          { transformer.useRegEx && <InputGroup.Text>/</InputGroup.Text> }
           <FormControl
               placeholder={transformer.old}
               onChange={(event) => setReplacer({...transformer, old: event.currentTarget.value})}/>
+          { transformer.useRegEx && <InputGroup.Text>/g</InputGroup.Text> }
         </InputGroup>
         <InputGroup className="mb-3">
           <InputGroup.Text id="with">with</InputGroup.Text>
