@@ -1,21 +1,16 @@
 import {Dropdown, DropdownButton, FormControl, InputGroup} from "react-bootstrap";
 import Replace from "../transformers/Replace";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 interface Props {
   transformer: Replace
 }
 
 export const TransformerOptionsReplace = ({transformer}: Props) => {
-  const [useRegEx, setUseRegEx] = useState<boolean>(transformer.useRegEx)
-
-  function onDropdownSelect(eventKey: string | null) {
-    if (!eventKey) {
-      return
-    }
-
-    setUseRegEx(eventKey === "regex")
-  }
+  const [replacer, setReplacer] = useState<Partial<Replace>>(transformer)
+  useEffect(() => {
+    console.log(replacer)
+  }, [replacer])
 
   return (
       <div>
@@ -23,17 +18,21 @@ export const TransformerOptionsReplace = ({transformer}: Props) => {
           <InputGroup.Text id="replace">Replace</InputGroup.Text>
           <DropdownButton
               id="isRegex"
-              title={useRegEx ? "regex" : "text"}
+              title={replacer.useRegEx ? "regex" : "text"}
               variant="outline-secondary"
-              onSelect={(eventKey) => onDropdownSelect(eventKey)}>
+              onSelect={(eventKey) => setReplacer({...replacer, useRegEx: eventKey === "regex"})}>
             <Dropdown.Item eventKey="text">text</Dropdown.Item>
             <Dropdown.Item eventKey="regex">regex</Dropdown.Item>
           </DropdownButton>
-          <FormControl placeholder="text"/>
+          <FormControl
+              placeholder={replacer.old && replacer.old?.length > 0 ? replacer.old : ""}
+              onChange={(event) => setReplacer({...replacer, old: event.currentTarget.value})}/>
         </InputGroup>
         <InputGroup className="mb-3">
-          <InputGroup.Text id="with">With</InputGroup.Text>
-          <FormControl placeholder="text"/>
+          <InputGroup.Text id="with">with</InputGroup.Text>
+          <FormControl
+              placeholder={replacer.new && replacer.new?.length > 0 ? replacer.new : ""}
+              onChange={(event) => setReplacer({...replacer, new: event.currentTarget.value})}/>
         </InputGroup>
       </div>
   )
