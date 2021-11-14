@@ -1,6 +1,7 @@
 import Unescape from "./Unescape";
 import {Transformer} from "./Transformer";
 import JsonBeautify from "./JsonBeautify";
+import Replace from "./Replace";
 
 type CreateTransformerFunction = () => Transformer;
 
@@ -13,7 +14,8 @@ export default class TransformerBlueprint {
 
   private static allTransformers: Map<string, TransformerBlueprint> = new Map<string, TransformerBlueprint>([
     ["unescape", new TransformerBlueprint(() => new Unescape())],
-    ["jsonbeautify", new TransformerBlueprint(() => new JsonBeautify())]
+    ["jsonbeautify", new TransformerBlueprint(() => new JsonBeautify())],
+    ["replace", new TransformerBlueprint(() => new Replace())]
   ])
 
   static forName(name: string): (TransformerBlueprint | undefined) {

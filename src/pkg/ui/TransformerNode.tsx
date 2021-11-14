@@ -1,28 +1,34 @@
 import {Accordion} from "react-bootstrap";
 import React from "react";
 import {Transformer} from "../transformers/Transformer";
+import Replace from "../transformers/Replace";
+import { TransformerOptionsEmpty } from "./TransformerOptionsEmpty";
+import {TransformerOptionsReplace} from "./TransformerOptionsReplace";
 
 interface Props {
   index: number
   transformer: Transformer
+  children?: React.ReactNode
 }
 
-export const TransformerNode = ({index, transformer}: Props) => {
+export const TransformerNode = (props: Props) => {
+  const optionBody = (transformer: Transformer): React.ReactNode => {
+    if (transformer instanceof Replace) {
+      return <TransformerOptionsReplace transformer={transformer}/>
+    } else {
+      return <TransformerOptionsEmpty/>
+    }
+  }
+
   return (
       <Accordion.Item
-          key={index.toString()}
-          eventKey={index.toString()}>
+          key={props.index.toString()}
+          eventKey={props.index.toString()}>
         <Accordion.Header>
-          {transformer.name()}
+          {props.transformer.name()}
         </Accordion.Header>
         <Accordion.Body>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-          velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-          cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
+          {optionBody(props.transformer)}
         </Accordion.Body>
       </Accordion.Item>
   );
