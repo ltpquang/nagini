@@ -10,7 +10,6 @@ interface Props {
 export const TransformerOptionsReplace = ({transformer, onChange}: Props) => {
   const [replacer, setReplacer] = useState<Partial<Replace>>(transformer)
   useEffect(() => {
-    console.log(replacer)
     if (onChange) {
       onChange(Replace.fromPartial(replacer))
     }

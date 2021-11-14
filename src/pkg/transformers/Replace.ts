@@ -1,6 +1,6 @@
-import {Transformer} from "../base/Transformer";
+import {StringTransformer} from "../base/StringTransformer";
 
-export default class Replace implements Transformer {
+export default class Replace implements StringTransformer {
   public old: string = "";
   public new: string = "";
   public useRegEx: boolean = false;

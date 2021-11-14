@@ -1,6 +1,6 @@
-import {Transformer} from "../base/Transformer";
+import {StringTransformer} from "../base/StringTransformer";
 
-export default class JsonBeautify implements Transformer {
+export default class JsonBeautify implements StringTransformer {
   name(): string {
     return "JSON Beautify";
   }

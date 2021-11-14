@@ -1,18 +1,18 @@
-import {Transformer} from "./Transformer";
+import {StringTransformer} from "./StringTransformer";
 
-class TransformEngine implements Transformer {
+class TransformEngine implements StringTransformer {
   static clone(from: TransformEngine): TransformEngine {
     let result = new TransformEngine()
     result._transformers = from.transformers
     return result
   }
 
-  private _transformers: Transformer[] = [];
-  get transformers(): Transformer[] {
+  private _transformers: StringTransformer[] = [];
+  get transformers(): StringTransformer[] {
     return this._transformers;
   }
 
-  addTransformer(input: Transformer) {
+  addTransformer(input: StringTransformer) {
     this._transformers.push(input)
   }
 

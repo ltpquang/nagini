@@ -1,9 +1,9 @@
 import Unescape from "../transformers/Unescape";
-import {Transformer} from "./Transformer";
+import {StringTransformer} from "./StringTransformer";
 import JsonBeautify from "../transformers/JsonBeautify";
 import Replace from "../transformers/Replace";
 
-type CreateTransformerFunction = () => Transformer;
+type CreateTransformerFunction = () => StringTransformer;
 
 export default class TransformerBlueprint {
   newInstance: CreateTransformerFunction

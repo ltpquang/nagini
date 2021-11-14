@@ -1,6 +1,6 @@
-import {Transformer} from "../base/Transformer";
+import {StringTransformer} from "../base/StringTransformer";
 
-export default class Unescape implements Transformer {
+export default class Unescape implements StringTransformer {
   transformData(input: string): string {
     // TODO: https://onlinestringtools.com/unescape-string
     return input.replace(

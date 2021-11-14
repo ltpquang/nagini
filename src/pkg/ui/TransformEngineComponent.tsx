@@ -3,6 +3,7 @@ import {Accordion, Dropdown, DropdownButton} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
 import TransformerBlueprint from "../base/TransformerBlueprint";
 import {TransformerNode} from "./TransformerNode";
+import {StringTransformer} from "../base/StringTransformer";
 
 interface Props {
   onChange?: (engine: TransformEngine) => void
@@ -42,6 +43,10 @@ const TransformEngineComponent = ({onChange}: Props) => {
     return result
   }
 
+  function handleOnChange(index: number, transformer: StringTransformer) {
+    console.log(index, transformer)
+  }
+
   return (
       <div>
         <Accordion>
@@ -50,7 +55,9 @@ const TransformEngineComponent = ({onChange}: Props) => {
                 (transformer, index, _) =>
                     <TransformerNode index={index}
                                      key={index.toString()}
-                                     transformer={transformer}/>
+                                     transformer={transformer}
+                                     onChange={(index, updated) => handleOnChange(index, updated)}
+                    />
             )
           }
         </Accordion>
