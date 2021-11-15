@@ -2,8 +2,10 @@ import {Accordion} from "react-bootstrap";
 import React from "react";
 import {StringTransformer} from "../base/StringTransformer";
 import Replace from "../transformers/Replace";
-import { TransformerOptionsEmpty } from "./TransformerOptionsEmpty";
+import {TransformerOptionsEmpty} from "./TransformerOptionsEmpty";
 import {TransformerOptionsReplace} from "./TransformerOptionsReplace";
+import JsonPath from "../transformers/JsonPath";
+import {TransformerOptionsJsonPath} from "./TransformerOptionsJsonPath";
 
 interface Props {
   index: number
@@ -16,6 +18,11 @@ export const TransformerNode = (props: Props) => {
   const optionBody = (transformer: StringTransformer): React.ReactNode => {
     if (transformer instanceof Replace) {
       return <TransformerOptionsReplace
+          transformer={transformer}
+          onChange={(transformer) => props.onChange?.(props.index, transformer)}
+      />
+    } else if (transformer instanceof JsonPath) {
+      return <TransformerOptionsJsonPath
           transformer={transformer}
           onChange={(transformer) => props.onChange?.(props.index, transformer)}
       />

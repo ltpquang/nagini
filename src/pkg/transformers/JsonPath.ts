@@ -21,4 +21,10 @@ export default class JsonPath implements StringTransformer {
       return "Invalid JSON string";
     }
   }
+
+  static fromPartial(p: Partial<JsonPath>): JsonPath {
+    let result = new JsonPath()
+    result.jsonPath = p.jsonPath ?? ""
+    return result
+  }
 }
