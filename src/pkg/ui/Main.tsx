@@ -15,7 +15,7 @@ export const Main = () => {
   return (
       <div className="Main">
         <Row>
-          <Col md={{span: 6}}>
+          <Col md={{span: 5}}>
             <FloatingLabel controlId="inputTextArea" label="Input">
               <Form.Control
                   as="textarea"
@@ -26,10 +26,13 @@ export const Main = () => {
                   }}
               />
             </FloatingLabel>
-            <TransformEngineComponent
-                onChange={setEngine}/>
+            <Row>
+              <Col md={{span: 10, offset: 1}}>
+                <TransformEngineComponent onChange={setEngine}/>
+              </Col>
+            </Row>
           </Col>
-          <Col md={{span: 6}}>
+          <Col md={{span: 7}}>
             <FloatingLabel controlId="outputTextArea" label="Output">
               <Form.Control
                   as="textarea"

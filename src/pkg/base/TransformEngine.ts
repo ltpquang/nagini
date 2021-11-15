@@ -22,6 +22,12 @@ class TransformEngine implements StringTransformer {
     }
   }
 
+  removeTransformer(index: number) {
+    if (this._transformers[index]) {
+      this._transformers.splice(index, 1);
+    }
+  }
+
   transformData(input: string): string {
     let result = input
     this.transformers.forEach((trans, index, _a) => {

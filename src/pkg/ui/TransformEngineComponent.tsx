@@ -29,13 +29,16 @@ const TransformEngineComponent = ({onChange}: Props) => {
     }
 
     engine.addTransformer(transformerMeta.newInstance())
-
     setEngine(prevState => TransformEngine.clone(prevState))
   }
 
-  function handleChangeTransformer(index: number, transformer: StringTransformer) {
+  const handleChangeTransformer = (index: number, transformer: StringTransformer) => {
     engine.replaceTransformer(index, transformer)
+    setEngine(prevState => TransformEngine.clone(prevState))
+  }
 
+  const handleRemoveTransformer = (index: number) => {
+    engine.removeTransformer(index)
     setEngine(prevState => TransformEngine.clone(prevState))
   }
 
@@ -59,6 +62,7 @@ const TransformEngineComponent = ({onChange}: Props) => {
                                      key={index.toString()}
                                      transformer={transformer}
                                      onChange={(index, updated) => handleChangeTransformer(index, updated)}
+                                     onRemove={(index) => handleRemoveTransformer(index)}
                     />
             )
           }
