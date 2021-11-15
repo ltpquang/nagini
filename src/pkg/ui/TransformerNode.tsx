@@ -1,4 +1,4 @@
-import {Accordion, Button, Col, Row} from "react-bootstrap";
+import {Accordion, Button, Col, OverlayTrigger, Popover, Row, Tooltip} from "react-bootstrap";
 import React from "react";
 import {StringTransformer} from "../base/StringTransformer";
 import Replace from "../transformers/Replace";
@@ -32,11 +32,24 @@ export const TransformerNode = (props: Props) => {
     }
   }
 
-  const handleRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleRemove = () => {
+    document.body.click()
     if (props.onRemove) {
       props.onRemove(props.index)
     }
   }
+
+  const renderOverlay = (onClick: () => void) => (
+      <Popover id="popover-basic">
+        <Popover.Header>Are you sure?</Popover.Header>
+        <Popover.Body>
+          <Button variant="danger" as="h5"
+              onClick={() => onClick()}>
+            Yes, delete!
+          </Button>
+        </Popover.Body>
+      </Popover>
+  );
 
   return (
       <Row>
@@ -53,7 +66,14 @@ export const TransformerNode = (props: Props) => {
           </Accordion.Item>
         </Col>
         <Col md={{span: 1}}>
-          <Button variant="danger" onClick={(e) => handleRemove(e)}><Trash/></Button>
+          <OverlayTrigger
+              trigger="click"
+              rootClose
+              placement="right"
+              overlay={renderOverlay(handleRemove)}
+          >
+            <Button variant="danger"><Trash/></Button>
+          </OverlayTrigger>
         </Col>
       </Row>
   );
