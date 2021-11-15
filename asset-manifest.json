@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/nagini/static/css/main.22b6e383.chunk.css",
-    "main.js": "/nagini/static/js/main.2ca6f90e.chunk.js",
-    "main.js.map": "/nagini/static/js/main.2ca6f90e.chunk.js.map",
+    "main.js": "/nagini/static/js/main.f4ee27c2.chunk.js",
+    "main.js.map": "/nagini/static/js/main.f4ee27c2.chunk.js.map",
     "runtime-main.js": "/nagini/static/js/runtime-main.4946f863.js",
     "runtime-main.js.map": "/nagini/static/js/runtime-main.4946f863.js.map",
     "static/css/2.383c0125.chunk.css": "/nagini/static/css/2.383c0125.chunk.css",
-    "static/js/2.f0e42a11.chunk.js": "/nagini/static/js/2.f0e42a11.chunk.js",
-    "static/js/2.f0e42a11.chunk.js.map": "/nagini/static/js/2.f0e42a11.chunk.js.map",
+    "static/js/2.d6abf65b.chunk.js": "/nagini/static/js/2.d6abf65b.chunk.js",
+    "static/js/2.d6abf65b.chunk.js.map": "/nagini/static/js/2.d6abf65b.chunk.js.map",
     "index.html": "/nagini/index.html",
     "static/css/2.383c0125.chunk.css.map": "/nagini/static/css/2.383c0125.chunk.css.map",
     "static/css/main.22b6e383.chunk.css.map": "/nagini/static/css/main.22b6e383.chunk.css.map",
-    "static/js/2.f0e42a11.chunk.js.LICENSE.txt": "/nagini/static/js/2.f0e42a11.chunk.js.LICENSE.txt"
+    "static/js/2.d6abf65b.chunk.js.LICENSE.txt": "/nagini/static/js/2.d6abf65b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4946f863.js",
     "static/css/2.383c0125.chunk.css",
-    "static/js/2.f0e42a11.chunk.js",
+    "static/js/2.d6abf65b.chunk.js",
     "static/css/main.22b6e383.chunk.css",
-    "static/js/main.2ca6f90e.chunk.js"
+    "static/js/main.f4ee27c2.chunk.js"
   ]
 }
