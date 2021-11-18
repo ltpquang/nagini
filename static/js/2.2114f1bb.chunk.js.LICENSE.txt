@@ -10,6 +10,8 @@ object-assign
   http://jedwatson.github.io/classnames
 */
 
+/*! http://mths.be/fromcodepoint v0.2.1 by @mathias */
+
 /** @license React v0.20.2
  * scheduler.production.min.js
  *
