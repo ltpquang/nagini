@@ -1,4 +1,4 @@
-import {Accordion, Button, Col, OverlayTrigger, Popover, Row, Tooltip} from "react-bootstrap";
+import {Accordion, Button, Col, OverlayTrigger, Popover, Row} from "react-bootstrap";
 import React from "react";
 import {StringTransformer} from "../base/StringTransformer";
 import Replace from "../transformers/Replace";
@@ -7,6 +7,8 @@ import {TransformerOptionsReplace} from "./TransformerOptionsReplace";
 import JsonPath from "../transformers/JsonPath";
 import {TransformerOptionsJsonPath} from "./TransformerOptionsJsonPath";
 import {Trash} from "react-bootstrap-icons";
+import JsonBeautify from "../transformers/JsonBeautify";
+import {TransformerOptionsJsonBeautify} from "./TransformerOptionsJsonBeautify";
 
 interface Props {
   index: number
@@ -24,6 +26,11 @@ export const TransformerNode = (props: Props) => {
       />
     } else if (transformer instanceof JsonPath) {
       return <TransformerOptionsJsonPath
+          transformer={transformer}
+          onChange={(transformer) => props.onChange?.(props.index, transformer)}
+      />
+    } else if (transformer instanceof JsonBeautify) {
+      return <TransformerOptionsJsonBeautify
           transformer={transformer}
           onChange={(transformer) => props.onChange?.(props.index, transformer)}
       />

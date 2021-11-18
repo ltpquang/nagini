@@ -1,8 +1,8 @@
 import {StringTransformer} from "../base/StringTransformer";
+import jp from 'jsonpath'
 
 export default class JsonPath implements StringTransformer {
   public jsonPath: string = ""
-  private jp = require('jsonpath')
 
   name(): string {
     return "JSON Path Query";
@@ -15,7 +15,7 @@ export default class JsonPath implements StringTransformer {
     try {
       input = input.replaceAll('\n', '')
       let obj = JSON.parse(input);
-      let resultObj = this.jp.query(obj, this.jsonPath)
+      let resultObj = jp.query(obj, this.jsonPath)
       return resultObj.toString()
     } catch (e) {
       return "Invalid JSON string";
