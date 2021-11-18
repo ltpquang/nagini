@@ -16,9 +16,11 @@ export const Main = () => {
   const renderOutput = (output: string) => {
     let obj = {}
     try {
-      obj = JSON.parse(input);
+      obj = JSON.parse(output);
+      console.log("valid json")
       return <ReactJson src={obj}/>
     } catch (e) {
+      console.log("invalid json", e)
       return (
           <FloatingLabel controlId="outputTextArea" label="Output">
             <Form.Control
