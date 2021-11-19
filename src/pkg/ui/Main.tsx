@@ -2,7 +2,8 @@ import React, {useEffect, useState} from "react";
 import {Col, FloatingLabel, Form, Row} from "react-bootstrap";
 import TransformEngine from "../base/TransformEngine";
 import TransformEngineComponent from "./TransformEngineComponent";
-import ReactJson from "react-json-view";
+import { JsonView, defaultStyles } from 'react-json-view-lite';
+import 'react-json-view-lite/dist/index.css';
 
 export const Main = () => {
   const [input, setInput] = useState<string>("");
@@ -18,7 +19,11 @@ export const Main = () => {
     try {
       obj = JSON.parse(output);
       console.log("valid json")
-      return <ReactJson src={obj}/>
+      return <JsonView
+          data={obj}
+          shouldInitiallyExpand={(level) => true}
+          style={defaultStyles}
+      />
     } catch (e) {
       console.log("invalid json", e)
       return (
