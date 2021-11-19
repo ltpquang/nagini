@@ -42,7 +42,7 @@ export const Main = () => {
   return (
       <div className="Main">
         <Row>
-          <Col md={{span: 5}} style={{minHeight: "100vh", overflow: "scroll"}}>
+          <Col md={{span: 5}} style={{height: "100vh", overflow: "scroll"}}>
             <FloatingLabel controlId="inputTextArea" label="Input">
               <Form.Control
                   as="textarea"
@@ -59,7 +59,7 @@ export const Main = () => {
               </Col>
             </Row>
           </Col>
-          <Col md={{span: 7}} style={{minHeight: "100vh", overflow: "scroll"}}>
+          <Col md={{span: 7}} style={{height: "100vh", overflow: "scroll"}}>
             {renderOutput(output)}
           </Col>
         </Row>
