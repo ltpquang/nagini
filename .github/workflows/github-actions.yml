@@ -3,23 +3,33 @@ on:
   push:
     branches:
       - main
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 16.x ]
     steps:
       - name: Checkout
         uses: actions/checkout@v2.4.0
 
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Unit test
-        run: npm run test
+        run: npm test
 
       - name: Install and Build
-        run: |
-          npm install
-          npm run build
+        run: npm run build
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.6
-        with:
-          branch: gh-pages
-          folder: build
+#      - name: Deploy
+#        uses: JamesIves/github-pages-deploy-action@4.1.6
+#        with:
+#          branch: gh-pages
+#          folder: build
