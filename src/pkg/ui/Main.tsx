@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Col, FloatingLabel, Form, Row} from "react-bootstrap";
 import TransformEngine from "../base/TransformEngine";
 import TransformEngineComponent from "./TransformEngineComponent";
-import { JsonView, defaultStyles } from 'react-json-view-lite';
+import {defaultStyles, JsonView} from 'react-json-view-lite';
 import 'react-json-view-lite/dist/index.css';
 
 export const Main = () => {
@@ -33,7 +33,7 @@ export const Main = () => {
                 placeholder="Paste"
                 style={{height: '100px'}}
                 value={output}
-                readOnly={true} />
+                readOnly={true}/>
           </FloatingLabel>
       )
     }
@@ -42,24 +42,26 @@ export const Main = () => {
   return (
       <div className="Main">
         <Row>
-          <Col md={{span: 5}} style={{height: "100vh", overflow: "scroll"}}>
-            <FloatingLabel controlId="inputTextArea" label="Input">
-              <Form.Control
-                  as="textarea"
-                  placeholder="Paste"
-                  style={{height: '100px'}}
-                  onChange={(event) => {
-                    setInput(event.currentTarget.value)
-                  }}
-              />
-            </FloatingLabel>
-            <Row>
-              <Col md={{span: 10, offset: 1}}>
-                <TransformEngineComponent onChange={setEngine}/>
-              </Col>
-            </Row>
+          <Col md={{span: 5}} className="main-layout-column scrolling-area">
+            <div className="scrolling-element-inside">
+              <FloatingLabel controlId="inputTextArea" label="Input">
+                <Form.Control
+                    as="textarea"
+                    placeholder="Paste"
+                    style={{height: '100px'}}
+                    onChange={(event) => {
+                      setInput(event.currentTarget.value)
+                    }}
+                />
+              </FloatingLabel>
+              <Row>
+                <Col md={{span: 10, offset: 1}}>
+                  <TransformEngineComponent onChange={setEngine}/>
+                </Col>
+              </Row>
+            </div>
           </Col>
-          <Col md={{span: 7}} style={{height: "100vh", overflow: "scroll"}}>
+          <Col md={{span: 7}} className="main-layout-column">
             {renderOutput(output)}
           </Col>
         </Row>
