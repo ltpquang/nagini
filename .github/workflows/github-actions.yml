@@ -25,11 +25,11 @@ jobs:
       - name: Unit test
         run: npm test
 
-      - name: Install and Build
+      - name: Build
         run: npm run build
 
-#      - name: Deploy
-#        uses: JamesIves/github-pages-deploy-action@4.1.6
-#        with:
-#          branch: gh-pages
-#          folder: build
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.6
+        with:
+          branch: gh-pages
+          folder: build
