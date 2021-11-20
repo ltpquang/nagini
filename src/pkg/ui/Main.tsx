@@ -36,10 +36,13 @@ export const Main = () => {
         <Row>
           <Col md={{span: 5}} className="main-layout-column scrolling-area">
             <div className="scrolling-element-inside">
-              <TextareaAutosize
-                  className="input-textarea bg-light border"
-                  onChange={(event) => setInput(event.currentTarget.value)}
-              />
+              <div className="position-relative">
+                <TextareaAutosize
+                    className="input-textarea bg-light border"
+                    onChange={(event) => setInput(event.currentTarget.value)}
+                />
+                { input.length > 0 || <div className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">INPUT</div>}
+              </div>
               <Row className="mb-5">
                 <Col md={{span: 10, offset: 1}}>
                   <TransformEngineComponent
@@ -49,7 +52,10 @@ export const Main = () => {
             </div>
           </Col>
           <Col md={{span: 7}} className="main-layout-column">
-            {renderOutput(output)}
+            <div className="position-relative">
+              {renderOutput(output)}
+              { output.length > 0 || <div className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">OUTPUT</div>}
+            </div>
           </Col>
         </Row>
       </div>
