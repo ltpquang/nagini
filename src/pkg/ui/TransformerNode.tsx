@@ -48,9 +48,8 @@ export const TransformerNode = (props: Props) => {
 
   const renderOverlay = (onClick: () => void) => (
       <Popover id="popover-basic">
-        <Popover.Header>Are you sure?</Popover.Header>
         <Popover.Body>
-          <Button variant="danger" as="h5"
+          <Button variant="danger"
                   onClick={() => onClick()}>
             Yes, delete!
           </Button>
