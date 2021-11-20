@@ -28,14 +28,9 @@ export const Main = () => {
     } catch (e) {
       console.log("invalid json", e)
       return (
-          <FloatingLabel controlId="outputTextArea" label="Output">
-            <Form.Control
-                as="textarea"
-                placeholder="Paste"
-                style={{height: '100px'}}
-                value={output}
-                readOnly={true}/>
-          </FloatingLabel>
+          <div className="output-textarea bg-light border">
+            {output}
+          </div>
       )
     }
   }
@@ -46,12 +41,13 @@ export const Main = () => {
           <Col md={{span: 5}} className="main-layout-column scrolling-area">
             <div className="scrolling-element-inside">
               <TextareaAutosize
-                  className="input-textarea text-monospace bg-light border"
+                  className="input-textarea bg-light border"
                   onChange={(event) => setInput(event.currentTarget.value)}
               />
               <Row>
-                <Col md={{span: 10, offset: 1}}>
-                  <TransformEngineComponent onChange={setEngine}/>
+                <Col md={{span: 10, offset: 1}} className="transform-engine">
+                  <TransformEngineComponent
+                      onChange={setEngine}/>
                 </Col>
               </Row>
             </div>

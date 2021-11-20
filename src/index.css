@@ -33,3 +33,15 @@ code {
   min-height: 20vh;
   resize: none;
 }
+
+.output-textarea {
+  width: 100%;
+  min-height: 20vh;
+  padding: 12px;
+  word-wrap: break-word;
+}
+
+.transform-engine {
+  padding-bottom: 120px;
+  background-color: darkcyan;
+}
