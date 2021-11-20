@@ -8,9 +8,12 @@ export default class JsonBeautify implements StringTransformer {
   }
 
   transformData(input: string): string {
+    if (input.length === 0) {
+      return input
+    }
     return this.permissive
         ? this.transformPermissively(input)
-        : this.transformNormal(input)
+        : this.transformNormal(input);
   }
 
   private transformPermissively(input: string): string {
