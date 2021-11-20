@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Col, FloatingLabel, Form, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import TransformEngine from "../base/TransformEngine";
 import TransformEngineComponent from "./TransformEngineComponent";
 import {defaultStyles, JsonView} from 'react-json-view-lite';
@@ -19,12 +19,14 @@ export const Main = () => {
     let obj = {}
     try {
       obj = JSON.parse(output);
-      console.log("valid json")
       return <JsonView
           data={obj}
           shouldInitiallyExpand={(_) => true}
           style={defaultStyles}
       />
+      // return <div className="output-textarea bg-light border">
+      //   {output}
+      // </div>
     } catch (e) {
       console.log("invalid json", e)
       return (

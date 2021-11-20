@@ -5,7 +5,7 @@ export default class JsonPath implements StringTransformer {
   public jsonPath: string = ""
 
   name(): string {
-    return "JSON Path Query";
+    return "JSON Path";
   }
 
   transformData(input: string): string {
