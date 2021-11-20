@@ -58,18 +58,21 @@ const TransformEngineComponent = ({onChange}: Props) => {
           {
             engine.transformers.map(
                 (transformer, index, _) =>
-                    <TransformerNode index={index}
-                                     key={index.toString()}
-                                     transformer={transformer}
-                                     onChange={(index, updated) => handleChangeTransformer(index, updated)}
-                                     onRemove={(index) => handleRemoveTransformer(index)}
+                    <TransformerNode
+                        index={index}
+                        key={index.toString()}
+                        transformer={transformer}
+                        onChange={(index, updated) => handleChangeTransformer(index, updated)}
+                        onRemove={(index) => handleRemoveTransformer(index)}
                     />
             )
           }
         </Accordion>
 
-        <DropdownButton id="dropdown-item-button" title="Add node"
-                        onSelect={(eventKey) => handleAddTransformer(eventKey)}>
+        <DropdownButton
+            className="d-flex justify-content-center mt-4"
+            title="Add processor"
+            onSelect={(eventKey) => handleAddTransformer(eventKey)}>
           {renderSupportedNodes()}
         </DropdownButton>
       </div>

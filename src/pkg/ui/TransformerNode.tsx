@@ -51,7 +51,7 @@ export const TransformerNode = (props: Props) => {
         <Popover.Header>Are you sure?</Popover.Header>
         <Popover.Body>
           <Button variant="danger" as="h5"
-              onClick={() => onClick()}>
+                  onClick={() => onClick()}>
             Yes, delete!
           </Button>
         </Popover.Body>
@@ -59,7 +59,7 @@ export const TransformerNode = (props: Props) => {
   );
 
   return (
-      <Row>
+      <Row className="mt-3">
         <Col md={{span: 11}}>
           <Accordion.Item
               key={props.index.toString()}
@@ -79,7 +79,9 @@ export const TransformerNode = (props: Props) => {
               placement="right"
               overlay={renderOverlay(handleRemove)}
           >
-            <Button variant="danger"><Trash/></Button>
+            <Button
+                variant="danger"
+                className="mt-2"><Trash/></Button>
           </OverlayTrigger>
         </Col>
       </Row>

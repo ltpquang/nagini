@@ -44,8 +44,8 @@ export const Main = () => {
                   className="input-textarea bg-light border"
                   onChange={(event) => setInput(event.currentTarget.value)}
               />
-              <Row>
-                <Col md={{span: 10, offset: 1}} className="transform-engine">
+              <Row className="mb-5">
+                <Col md={{span: 10, offset: 1}}>
                   <TransformEngineComponent
                       onChange={setEngine}/>
                 </Col>
