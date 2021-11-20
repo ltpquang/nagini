@@ -9,6 +9,8 @@ import {TransformerOptionsJsonPath} from "./TransformerOptionsJsonPath";
 import {Trash} from "react-bootstrap-icons";
 import JsonBeautify from "../transformers/JsonBeautify";
 import {TransformerOptionsJsonBeautify} from "./TransformerOptionsJsonBeautify";
+import Unescape from "../transformers/Unescape";
+import {TransformerOptionsUnescape} from "./TransformerOptionsUnescape";
 
 interface Props {
   index: number
@@ -34,6 +36,8 @@ export const TransformerNode = (props: Props) => {
           transformer={transformer}
           onChange={(transformer) => props.onChange?.(props.index, transformer)}
       />
+    } else if (transformer instanceof Unescape) {
+      return <TransformerOptionsUnescape />
     } else {
       return <TransformerOptionsEmpty/>
     }

@@ -2,7 +2,7 @@ import {StringTransformer} from "../base/StringTransformer";
 
 export default class Unescape implements StringTransformer {
   transformData(input: string): string {
-    // TODO: https://onlinestringtools.com/unescape-string
+    // TODO: credit https://onlinestringtools.com/unescape-string
     return input.replace(
         /\\(.?)/g,
         function (i, n) {
@@ -11,6 +11,6 @@ export default class Unescape implements StringTransformer {
   }
 
   name(): string {
-    return "Unescape";
+    return "Unescape Splashed";
   }
 }
