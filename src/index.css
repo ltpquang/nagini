@@ -7,7 +7,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: crimson;
 }
 
 code {
@@ -27,4 +26,10 @@ code {
 
 .scrolling-element-inside {
   direction: ltr;
+}
+
+.input-textarea {
+  width: 100%;
+  min-height: 20vh;
+  resize: none;
 }

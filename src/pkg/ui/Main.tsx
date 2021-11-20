@@ -4,6 +4,7 @@ import TransformEngine from "../base/TransformEngine";
 import TransformEngineComponent from "./TransformEngineComponent";
 import {defaultStyles, JsonView} from 'react-json-view-lite';
 import 'react-json-view-lite/dist/index.css';
+import TextareaAutosize from 'react-textarea-autosize'
 
 export const Main = () => {
   const [input, setInput] = useState<string>("");
@@ -21,7 +22,7 @@ export const Main = () => {
       console.log("valid json")
       return <JsonView
           data={obj}
-          shouldInitiallyExpand={(level) => true}
+          shouldInitiallyExpand={(_) => true}
           style={defaultStyles}
       />
     } catch (e) {
@@ -44,16 +45,10 @@ export const Main = () => {
         <Row>
           <Col md={{span: 5}} className="main-layout-column scrolling-area">
             <div className="scrolling-element-inside">
-              <FloatingLabel controlId="inputTextArea" label="Input">
-                <Form.Control
-                    as="textarea"
-                    placeholder="Paste"
-                    style={{height: '100px'}}
-                    onChange={(event) => {
-                      setInput(event.currentTarget.value)
-                    }}
-                />
-              </FloatingLabel>
+              <TextareaAutosize
+                  className="input-textarea text-monospace bg-light border"
+                  onChange={(event) => setInput(event.currentTarget.value)}
+              />
               <Row>
                 <Col md={{span: 10, offset: 1}}>
                   <TransformEngineComponent onChange={setEngine}/>
