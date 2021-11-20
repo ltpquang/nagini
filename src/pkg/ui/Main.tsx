@@ -24,16 +24,10 @@ export const Main = () => {
           shouldInitiallyExpand={(_) => true}
           style={defaultStyles}
       />
-      // return <div className="output-textarea bg-light border">
-      //   {output}
-      // </div>
     } catch (e) {
-      console.log("invalid json", e)
-      return (
-          <div className="output-textarea bg-light border">
-            {output}
-          </div>
-      )
+      return <div className="output-textarea bg-light border">
+        {output}
+      </div>
     }
   }
 
