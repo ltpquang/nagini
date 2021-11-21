@@ -1,9 +1,9 @@
 import {Accordion, Button, Col, OverlayTrigger, Popover, Row} from "react-bootstrap";
 import React from "react";
 import {StringTransformer} from "../base/StringTransformer";
-import Replace from "../transformers/Replace";
+import ReplaceText from "../transformers/ReplaceText";
 import {TransformerOptionsEmpty} from "./TransformerOptionsEmpty";
-import {TransformerOptionsReplace} from "./TransformerOptionsReplace";
+import {TransformerOptionsReplaceText} from "./TransformerOptionsReplaceText";
 import JsonPath from "../transformers/JsonPath";
 import {TransformerOptionsJsonPath} from "./TransformerOptionsJsonPath";
 import {Trash} from "react-bootstrap-icons";
@@ -11,6 +11,8 @@ import JsonBeautify from "../transformers/JsonBeautify";
 import {TransformerOptionsJsonBeautify} from "./TransformerOptionsJsonBeautify";
 import Unescape from "../transformers/Unescape";
 import {TransformerOptionsUnescape} from "./TransformerOptionsUnescape";
+import ReplaceRegEx from "../transformers/ReplaceRegEx";
+import {TransformerOptionsReplaceRegEx} from "./TransformerOptionsReplaceRegEx";
 
 interface Props {
   index: number
@@ -21,8 +23,13 @@ interface Props {
 
 export const TransformerNode = (props: Props) => {
   const renderOptionBody = (transformer: StringTransformer): React.ReactNode => {
-    if (transformer instanceof Replace) {
-      return <TransformerOptionsReplace
+    if (transformer instanceof ReplaceText) {
+      return <TransformerOptionsReplaceText
+          transformer={transformer}
+          onChange={(transformer) => props.onChange?.(props.index, transformer)}
+      />
+    } else if (transformer instanceof ReplaceRegEx) {
+      return <TransformerOptionsReplaceRegEx
           transformer={transformer}
           onChange={(transformer) => props.onChange?.(props.index, transformer)}
       />
