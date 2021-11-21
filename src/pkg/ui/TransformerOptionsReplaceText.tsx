@@ -19,13 +19,13 @@ export const TransformerOptionsReplaceText = ({transformer, onChange}: Props) =>
         <InputGroup className="mb-3">
           <InputGroup.Text id="replace">Replace</InputGroup.Text>
           <FormControl
-              placeholder={transformer.old}
+              value={transformer.old}
               onChange={(event) => setReplacer({...transformer, old: event.currentTarget.value})}/>
         </InputGroup>
         <InputGroup className="mb-3">
           <InputGroup.Text id="with">with</InputGroup.Text>
           <FormControl
-              placeholder={transformer.new}
+              value={transformer.new}
               onChange={(event) => setReplacer({...transformer, new: event.currentTarget.value})}/>
         </InputGroup>
       </div>
