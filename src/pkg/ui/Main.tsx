@@ -11,11 +11,11 @@ export const Main = () => {
   const [engine, setEngine] = useState<TransformEngine>(new TransformEngine());
   const [output, setOutput] = useState<string>("");
 
-  function onPaste(e: Event) {
+  const onPaste = (e: Event) => {
     let clipboardEvent: ClipboardEvent = (e as ClipboardEvent);
     let data = clipboardEvent.clipboardData!.getData("text");
     setInput(data);
-  }
+  };
 
   useEffect(() => {
     window.addEventListener("paste", onPaste);
@@ -44,6 +44,14 @@ export const Main = () => {
     }
   }
 
+  const getShortcutText = () => {
+    if (navigator.platform.toLowerCase().indexOf("mac") != -1) {
+      return "⌘ + V";
+    } else {
+      return "Ctrl + V";
+    }
+  }
+
   return (
       <div className="Main position-relative">
         <Row>
@@ -56,7 +64,7 @@ export const Main = () => {
                     onChange={(event) => setInput(event.currentTarget.value)}
                 />
                 {input.length > 0 || <div
-                    className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">INPUT</div>}
+                    className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">{getShortcutText()}</div>}
               </div>
               <Row className="mb-5">
                 <Col md={{span: 10, offset: 1}}>
@@ -70,7 +78,7 @@ export const Main = () => {
             <div className="position-relative">
               {renderOutput(output)}
               {output.length > 0 || <div
-                  className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">OUTPUT</div>}
+                  className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">···</div>}
             </div>
           </Col>
         </Row>
