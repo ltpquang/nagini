@@ -11,6 +11,19 @@ export const Main = () => {
   const [engine, setEngine] = useState<TransformEngine>(new TransformEngine());
   const [output, setOutput] = useState<string>("");
 
+  function onPaste(e: Event) {
+    let clipboardEvent: ClipboardEvent = (e as ClipboardEvent);
+    let data = clipboardEvent.clipboardData!.getData("text");
+    setInput(data);
+  }
+
+  useEffect(() => {
+    window.addEventListener("paste", onPaste);
+    return () => {
+      window.removeEventListener("paste", onPaste);
+    };
+  }, []);
+
   useEffect(() => {
     setOutput(engine.transformData(input))
   }, [engine, input])
@@ -39,6 +52,7 @@ export const Main = () => {
               <div className="position-relative">
                 <TextareaAutosize
                     className="input-textarea bg-light border"
+                    value={input}
                     onChange={(event) => setInput(event.currentTarget.value)}
                 />
                 {input.length > 0 || <div
