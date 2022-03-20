@@ -4,12 +4,17 @@ import TransformEngine from "../base/TransformEngine";
 import TransformEngineComponent from "./TransformEngineComponent";
 import {defaultStyles, JsonView} from 'react-json-view-lite';
 import 'react-json-view-lite/dist/index.css';
-import TextareaAutosize from 'react-textarea-autosize'
+import TextareaAutosize from 'react-textarea-autosize';
+import { useSearchParams } from 'react-router-dom';
 
 export const Main = () => {
   const [input, setInput] = useState<string>("");
   const [engine, setEngine] = useState<TransformEngine>(new TransformEngine());
   const [output, setOutput] = useState<string>("");
+
+  const [searchParams] = useSearchParams();
+
+  const takeClipboard = searchParams.get('c')
 
   const onPaste = (e: Event) => {
     let clipboardEvent: ClipboardEvent = (e as ClipboardEvent);
@@ -18,11 +23,20 @@ export const Main = () => {
   };
 
   useEffect(() => {
+    // register paste event
     window.addEventListener("paste", onPaste);
+
+    // clipboard request
+    if (takeClipboard === '1') {
+      navigator.clipboard.readText().then(r => {
+        setInput(r);
+      })
+    }
+
     return () => {
       window.removeEventListener("paste", onPaste);
     };
-  }, []);
+  }, [takeClipboard]);
 
   useEffect(() => {
     setOutput(engine.transformData(input))
@@ -45,7 +59,7 @@ export const Main = () => {
   }
 
   const getShortcutText = () => {
-    if (navigator.platform.toLowerCase().indexOf("mac") != -1) {
+    if (navigator.platform.toLowerCase().indexOf("mac") !== -1) {
       return "⌘ + V";
     } else {
       return "Ctrl + V";
