@@ -47,6 +47,7 @@ code {
   font-size: 36pt;
   --bs-text-opacity: 1;
   color: rgba(0,0,0,.1)!important;
+  pointer-events: none;
 }
 
 .noselect {
