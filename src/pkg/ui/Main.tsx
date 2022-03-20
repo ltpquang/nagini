@@ -5,16 +5,17 @@ import TransformEngineComponent from "./TransformEngineComponent";
 import {defaultStyles, JsonView} from 'react-json-view-lite';
 import 'react-json-view-lite/dist/index.css';
 import TextareaAutosize from 'react-textarea-autosize';
-import { useSearchParams } from 'react-router-dom';
+import {useSearchParams, useNavigate, useLocation} from 'react-router-dom';
 
 export const Main = () => {
   const [input, setInput] = useState<string>("");
   const [engine, setEngine] = useState<TransformEngine>(new TransformEngine());
   const [output, setOutput] = useState<string>("");
 
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const takeClipboard = searchParams.get('c')
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const onPaste = (e: Event) => {
     let clipboardEvent: ClipboardEvent = (e as ClipboardEvent);
@@ -23,8 +24,15 @@ export const Main = () => {
   };
 
   useEffect(() => {
-    // register paste event
-    window.addEventListener("paste", onPaste);
+    let takeClipboard;
+    if (searchParams.has("c")) {
+      takeClipboard = searchParams.get("c");
+      if (takeClipboard) {
+        searchParams.delete("c");
+        setSearchParams(searchParams);
+        navigate(location.pathname, {replace: true});
+      }
+    }
 
     // clipboard request
     if (takeClipboard === '1') {
@@ -32,11 +40,15 @@ export const Main = () => {
         setInput(r);
       })
     }
+  }, [location, navigate, searchParams, setSearchParams]);
 
+  useEffect(() => {
+    // register paste event
+    window.addEventListener("paste", onPaste);
     return () => {
       window.removeEventListener("paste", onPaste);
     };
-  }, [takeClipboard]);
+  }, []);
 
   useEffect(() => {
     setOutput(engine.transformData(input))
