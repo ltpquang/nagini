@@ -9,19 +9,13 @@ import {useSearchParams, useNavigate, useLocation} from 'react-router-dom';
 
 export const Main = () => {
   const [input, setInput] = useState<string>("");
-  const [engine, setEngine] = useState<TransformEngine>(new TransformEngine());
+  const [engine, setEngine] = useState<TransformEngine>(() => new TransformEngine());
   const [output, setOutput] = useState<string>("");
 
   const [searchParams, setSearchParams] = useSearchParams();
 
   const location = useLocation();
   const navigate = useNavigate();
-
-  const onPaste = (e: Event) => {
-    let clipboardEvent: ClipboardEvent = (e as ClipboardEvent);
-    let data = clipboardEvent.clipboardData!.getData("text");
-    setInput(data);
-  };
 
   useEffect(() => {
     let takeClipboard;
@@ -42,16 +36,10 @@ export const Main = () => {
     }
   }, [location, navigate, searchParams, setSearchParams]);
 
-  useEffect(() => {
-    // register paste event
-    window.addEventListener("paste", onPaste);
-    return () => {
-      window.removeEventListener("paste", onPaste);
-    };
-  }, []);
 
   useEffect(() => {
-    setOutput(engine.transformData(input))
+    let result = engine.transformData(input)
+    setOutput(result);
   }, [engine, input])
 
   const renderOutput = (output: string) => {
@@ -87,7 +75,15 @@ export const Main = () => {
                 <TextareaAutosize
                     className="input-textarea bg-light border"
                     value={input}
-                    onChange={(event) => setInput(event.currentTarget.value)}
+                    onChange={(event) => {
+                      let val = event.target.value;
+                      setInput(val)
+                    }}
+                    onPaste={(event) => {
+                      event.preventDefault();
+                      let paste = event.clipboardData.getData("text");
+                      setInput(paste);
+                    }}
                 />
                 {input.length > 0 || <div
                     className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">{getShortcutText()}</div>}

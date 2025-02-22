@@ -31,13 +31,13 @@ export const TransformerOptionsJsonBeautify = ({transformer, onChange}: Props) =
         </Col>
         <Col>
           <div className="d-flex justify-content-end">
-            <Toggle
-                defaultChecked={transformer.permissive}
-                icons={false}
-                onChange={(event: { currentTarget: { checked: any; }; }) => setPermissive({
-                  ...transformer,
-                  permissive: event.currentTarget.checked
-                })}/>
+            {/*<Toggle*/}
+            {/*    defaultChecked={transformer.permissive}*/}
+            {/*    icons={false}*/}
+            {/*    onChange={(event: { currentTarget: { checked: any; }; }) => setPermissive({*/}
+            {/*      ...transformer,*/}
+            {/*      permissive: event.currentTarget.checked*/}
+            {/*    })}/>*/}
           </div>
         </Col>
       </Row>
