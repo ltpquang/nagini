@@ -7,8 +7,6 @@ import {TransformerOptionsReplaceText} from "./TransformerOptionsReplaceText";
 import JsonPath from "../transformers/JsonPath";
 import {TransformerOptionsJsonPath} from "./TransformerOptionsJsonPath";
 import {Trash} from "react-bootstrap-icons";
-import JsonBeautify from "../transformers/JsonBeautify";
-import {TransformerOptionsJsonBeautify} from "./TransformerOptionsJsonBeautify";
 import Unescape from "../transformers/Unescape";
 import {TransformerOptionsUnescape} from "./TransformerOptionsUnescape";
 import ReplaceRegEx from "../transformers/ReplaceRegEx";
@@ -35,11 +33,6 @@ export const TransformerNode = (props: Props) => {
       />
     } else if (transformer instanceof JsonPath) {
       return <TransformerOptionsJsonPath
-          transformer={transformer}
-          onChange={(transformer) => props.onChange?.(props.index, transformer)}
-      />
-    } else if (transformer instanceof JsonBeautify) {
-      return <TransformerOptionsJsonBeautify
           transformer={transformer}
           onChange={(transformer) => props.onChange?.(props.index, transformer)}
       />

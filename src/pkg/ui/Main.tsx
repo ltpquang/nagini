@@ -9,7 +9,7 @@ import {useSearchParams, useNavigate, useLocation} from 'react-router-dom';
 
 export const Main = () => {
   const [input, setInput] = useState<string>("");
-  const [engine, setEngine] = useState<TransformEngine>(new TransformEngine());
+  const [engine, setEngine] = useState<TransformEngine>(() => new TransformEngine());
   const [output, setOutput] = useState<string>("");
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,10 +17,12 @@ export const Main = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const onPaste = (e: Event) => {
-    let clipboardEvent: ClipboardEvent = (e as ClipboardEvent);
-    let data = clipboardEvent.clipboardData!.getData("text");
-    setInput(data);
+  const handlePaste = (event: ClipboardEvent) => {
+    event.preventDefault();
+    let paste = event.clipboardData?.getData("text");
+    if (paste) {
+      setInput(paste);
+    }
   };
 
   useEffect(() => {
@@ -43,15 +45,15 @@ export const Main = () => {
   }, [location, navigate, searchParams, setSearchParams]);
 
   useEffect(() => {
-    // register paste event
-    window.addEventListener("paste", onPaste);
+    document.addEventListener("paste", handlePaste);
     return () => {
-      window.removeEventListener("paste", onPaste);
+      document.removeEventListener("paste", handlePaste);
     };
   }, []);
 
   useEffect(() => {
-    setOutput(engine.transformData(input))
+    let result = engine.transformData(input)
+    setOutput(result);
   }, [engine, input])
 
   const renderOutput = (output: string) => {
@@ -59,9 +61,9 @@ export const Main = () => {
     try {
       obj = JSON.parse(output);
       return <JsonView
-          data={obj}
-          shouldInitiallyExpand={(_) => true}
-          style={defaultStyles}
+        data={obj}
+        shouldInitiallyExpand={(_) => true}
+        style={defaultStyles}
       />
     } catch (e) {
       return <div className="output-textarea bg-light border">
@@ -79,47 +81,54 @@ export const Main = () => {
   }
 
   return (
-      <div className="Main position-relative">
-        <Row>
-          <Col md={{span: 5}} className="main-layout-column scrolling-area">
-            <div className="scrolling-element-inside">
-              <div className="position-relative">
-                <TextareaAutosize
-                    className="input-textarea bg-light border"
-                    value={input}
-                    onChange={(event) => setInput(event.currentTarget.value)}
-                />
-                {input.length > 0 || <div
-                    className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">{getShortcutText()}</div>}
-              </div>
-              <Row className="mb-5">
-                <Col md={{span: 10, offset: 1}}>
-                  <TransformEngineComponent
-                      onChange={setEngine}/>
-                </Col>
-              </Row>
-            </div>
-          </Col>
-          <Col md={{span: 7}} className="main-layout-column">
+    <div className="Main position-relative">
+      <Row>
+        <Col md={{span: 5}} className="main-layout-column scrolling-area">
+          <div className="scrolling-element-inside">
             <div className="position-relative">
-              {renderOutput(output)}
-              {output.length > 0 || <div
-                  className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">···</div>}
+              <TextareaAutosize
+                className="input-textarea bg-light border"
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+                onPaste={(event) => {
+                  event.preventDefault();
+                  let paste = event.clipboardData?.getData("text");
+                  if (paste) {
+                    setInput(paste);
+                  }
+                }}
+              />
+              {input.length > 0 || <div
+               className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">{getShortcutText()}</div>}
             </div>
-          </Col>
-        </Row>
-        {output.length > 0 || <a target="_blank"
-                                 rel="noopener noreferrer"
-                                 href="https://github.com/ltpquang/nagini"
-                                 className="position-absolute top-0 end-0">
-          <Image loading="lazy" width="120" height="120"
-                 src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149"
-                 className="attachment-full size-full"
-                 alt="Fork me on GitHub"
-                 data-recalc-dims="1"/>
-        </a>
-        }
-      </div>
+            <Row className="mb-5">
+              <Col md={{span: 10, offset: 1}}>
+                <TransformEngineComponent
+                  onChange={setEngine}/>
+              </Col>
+            </Row>
+          </div>
+        </Col>
+        <Col md={{span: 7}} className="main-layout-column">
+          <div className="position-relative">
+            {renderOutput(output)}
+            {output.length > 0 || <div
+             className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">···</div>}
+          </div>
+        </Col>
+      </Row>
+      {output.length > 0 || <a target="_blank"
+                               rel="noopener noreferrer"
+                               href="https://github.com/ltpquang/nagini"
+                               className="position-absolute top-0 end-0">
+        <Image loading="lazy" width="120" height="120"
+               src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149"
+               className="attachment-full size-full"
+               alt="Fork me on GitHub"
+               data-recalc-dims="1"/>
+      </a>
+      }
+    </div>
   )
 }
 
