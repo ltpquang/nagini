@@ -18,7 +18,7 @@ export const Main = () => {
   const navigate = useNavigate();
 
   const handlePaste = (event: ClipboardEvent) => {
-    // event.preventDefault();
+    event.preventDefault();
     let paste = event.clipboardData?.getData("text");
     if (paste) {
       setInput(paste);
@@ -89,14 +89,13 @@ export const Main = () => {
               <TextareaAutosize
                 className="input-textarea bg-light border"
                 value={input}
-                onChange={(event) => {
-                  let val = event.target.value;
-                  setInput(val)
-                }}
+                onChange={(event) => setInput(event.target.value)}
                 onPaste={(event) => {
                   event.preventDefault();
-                  let paste = event.clipboardData.getData("text");
-                  setInput(paste);
+                  let paste = event.clipboardData?.getData("text");
+                  if (paste) {
+                    setInput(paste);
+                  }
                 }}
               />
               {input.length > 0 || <div
