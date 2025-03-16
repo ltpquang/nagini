@@ -1,10 +1,13 @@
 import {useEffect, useState} from "react";
 import TransformEngine from "../base/TransformEngine";
-import TransformEngineComponent from "./TransformEngineComponent";
+// import TransformEngineComponent from "./TransformEngineComponent";
 import {defaultStyles, JsonView} from 'react-json-view-lite';
 import 'react-json-view-lite/dist/index.css';
 import TextareaAutosize from 'react-textarea-autosize';
 import {useSearchParams, useNavigate, useLocation} from 'react-router';
+import {Col, Row} from "antd";
+import TextArea from "antd/es/input/TextArea";
+import {JsonViewer} from "@textea/json-viewer";
 
 export const Main = () => {
   const [input, setInput] = useState<string>("");
@@ -59,34 +62,36 @@ export const Main = () => {
     let obj = {}
     try {
       obj = JSON.parse(output);
-      return <JsonView
-        data={obj}
-        shouldExpandNode={() => true}
-        style={defaultStyles}
-      />
+      return <JsonViewer value={obj}/>
+      // return <JsonView
+      //   data={obj}
+      //   shouldExpandNode={() => true}
+      //   style={defaultStyles}
+      // />
     } catch (e) {
       console.log(e);
-      return <div className="output-textarea bg-light border">
-        {output}
-      </div>
+      return <JsonViewer value={output}/>
+      // return <div className="output-textarea bg-light border">
+      //   {output}
+      // </div>
     }
   }
 
-  const getShortcutText = () => {
-    if (navigator.platform.toLowerCase().indexOf("mac") !== -1) {
-      return "⌘ + V";
-    } else {
-      return "Ctrl + V";
-    }
-  }
+  // const getShortcutText = () => {
+  //   if (navigator.platform.toLowerCase().indexOf("mac") !== -1) {
+  //     return "⌘ + V";
+  //   } else {
+  //     return "Ctrl + V";
+  //   }
+  // }
 
   return (
-    <div className="Main position-relative">
-      <div className="scrolling-element-inside">
-        <div className="position-relative">
-          <TextareaAutosize
-            className="input-textarea bg-light border"
+    <>
+      <Row>
+        <Col flex={2} style={{backgroundColor: "#f0f0f0"}}>
+          <TextArea
             value={input}
+            autoSize={{minRows: 3, maxRows: 5}}
             onChange={(event) => setInput(event.target.value)}
             onPaste={(event) => {
               event.preventDefault();
@@ -96,29 +101,29 @@ export const Main = () => {
               }
             }}
           />
-          {input.length > 0 || <div
-           className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">{getShortcutText()}</div>}
-        </div>
-        <TransformEngineComponent
-          onChange={setEngine}/>
-      </div>
-      <div className="position-relative">
-        {renderOutput(output)}
-        {output.length > 0 || <div
-         className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">···</div>}
-      </div>
-      {output.length > 0 || <a target="_blank"
-                               rel="noopener noreferrer"
-                               href="https://github.com/ltpquang/nagini"
-                               className="position-absolute top-0 end-0">
-        {/*<Image loading="lazy" width="120" height="120"*/}
-        {/*       src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149"*/}
-        {/*       className="attachment-full size-full"*/}
-        {/*       alt="Fork me on GitHub"*/}
-        {/*       data-recalc-dims="1"/>*/}
-      </a>
-      }
-    </div>
+          {/*<TransformEngineComponent onChange={setEngine}/>*/}
+        </Col>
+        <Col flex={3} style={{backgroundColor: "lightcoral"}}>
+          {renderOutput(output)}
+        </Col>
+      </Row>
+
+
+      {/*{input.length > 0 || <div*/}
+      {/* className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">{getShortcutText()}</div>}*/}
+      {/*{output.length > 0 || <div*/}
+      {/* className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">···</div>}*/}
+
+      {/*{output.length > 0 || <a target="_blank"*/}
+      {/*                         rel="noopener noreferrer"*/}
+      {/*                         href="https://github.com/ltpquang/nagini"*/}
+      {/*                         className="position-absolute top-0 end-0">*/}
+      {/*<Image loading="lazy" width="120" height="120"*/}
+      {/*       src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149"*/}
+      {/*       className="attachment-full size-full"*/}
+      {/*       alt="Fork me on GitHub"*/}
+      {/*       data-recalc-dims="1"/>*/}
+    </>
   )
 }
 
