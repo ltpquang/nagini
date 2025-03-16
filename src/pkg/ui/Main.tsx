@@ -4,8 +4,9 @@ import TransformEngine from "../base/TransformEngine";
 import 'react-json-view-lite/dist/index.css';
 import {useSearchParams, useNavigate, useLocation} from 'react-router';
 import {JsonViewer} from "@textea/json-viewer";
-import {Container, Grid2} from "@mui/material";
+import {Container, Grid2, Collapse, Grow, Fade} from "@mui/material";
 import {InputBox} from "../../InputBox/index..tsx";
+import {TransitionGroup} from "react-transition-group";
 
 export const Main = () => {
   const [input, setInput] = useState<string>("");
@@ -16,6 +17,8 @@ export const Main = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
+
+  const inputAvailable = input.length > 0;
 
   const handlePaste = (event: ClipboardEvent) => {
     event.preventDefault();
@@ -66,25 +69,19 @@ export const Main = () => {
 
   return (
     <>
-      <Container
-        style={{
-          // backgroundColor: "lightblue",
-          width: "100%",
-          height: "100vh",
-        }}
-      >
-        <Grid2
-          container
-          columnSpacing={4}
+      <Container style={{width: "100%", height: "100vh"}}>
+
+        <Grid2 container columnSpacing={4}
           sx={{
             justifyContent: "center",
             alignItems: "center",
             height: "100%",
             width: "100%",
           }}
-          // style={{backgroundColor: "lightyellow"}}
         >
+
           <Grid2
+            // key="input"
             size={5}
             sx={{
               justifyContent: "start",
@@ -106,8 +103,15 @@ export const Main = () => {
             />
           </Grid2>
 
-          {input.length > 0 && (
+
+          <Grow
+            in={inputAvailable}
+            style={{transformOrigin: '0 0 0'}}
+            unmountOnExit={true}
+            {...inputAvailable ? {timeout: 500} : {timeout: 0}}
+          >
             <Grid2
+              key="output"
               size={7}
               sx={{
                 justifyContent: "start",
@@ -128,24 +132,10 @@ export const Main = () => {
                 }}
               />
             </Grid2>
-          )}
+          </Grow>
 
         </Grid2>
       </Container>
-
-
-      {/*{output.length > 0 || <div*/}
-      {/* className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">···</div>}*/}
-
-      {/*{output.length > 0 || <a target="_blank"*/}
-      {/*                         rel="noopener noreferrer"*/}
-      {/*                         href="https://github.com/ltpquang/nagini"*/}
-      {/*                         className="position-absolute top-0 end-0">*/}
-      {/*<Image loading="lazy" width="120" height="120"*/}
-      {/*       src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149"*/}
-      {/*       className="attachment-full size-full"*/}
-      {/*       alt="Fork me on GitHub"*/}
-      {/*       data-recalc-dims="1"/>*/}
     </>
   )
 }
