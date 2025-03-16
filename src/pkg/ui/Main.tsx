@@ -69,13 +69,13 @@ export const Main = () => {
       <Container style={{width: "100%", height: "100vh"}}>
 
         <Grid2 container columnSpacing={4}
-          sx={{
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100%",
-            width: "100%",
-            padding: "36px 0"
-          }}
+               sx={{
+                 justifyContent: "center",
+                 alignItems: "center",
+                 height: "100%",
+                 width: "100%",
+                 padding: "36px 0"
+               }}
         >
 
           <Grid2
@@ -104,9 +104,11 @@ export const Main = () => {
           <Grow
             in={inputAvailable}
             style={{transformOrigin: '0 0 0'}}
+            mountOnEnter={true}
             unmountOnExit={true}
             {...inputAvailable ? {timeout: 500} : {timeout: 0}}
           >
+
             <Grid2
               key="output"
               size={7}
@@ -114,14 +116,18 @@ export const Main = () => {
                 justifyContent: "start",
                 maxHeight: "100%",
                 overflow: "auto",
+                scrollbarColor: "lightgray white",
+                padding: "24px 0",
               }}
             >
+
               <JsonViewer
                 value={parseOutput(output)}
                 rootName={false}
                 displaySize={false}
                 displayDataTypes={false}
                 highlightUpdates={false}
+                displayComma={true}
                 editable={false}
                 sx={{
                   whiteSpace: 'nowrap',
