@@ -5,7 +5,7 @@ export default class Unescape implements StringTransformer {
     // TODO: credit https://onlinestringtools.com/unescape-string
     return input.replace(
         /\\(.?)/g,
-        function (i, n) {
+        function (_i, n) {
           return n === "\\" ? "\\" : n === "n" ? "\n" : n === "t" ? "	" : n === "" ? "" : n
         })
   }

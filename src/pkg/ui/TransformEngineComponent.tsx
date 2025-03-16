@@ -1,7 +1,7 @@
 import TransformEngine from "../base/TransformEngine";
 import {useEffect, useState} from "react";
-import {TransformerNode} from "./TransformerNode";
-import {StringTransformer} from "../base/StringTransformer";
+// import {TransformerNode} from "./TransformerNode";
+// import {StringTransformer} from "../base/StringTransformer";
 import {Collapse, Dropdown, MenuProps, Space} from "antd";
 import type {CollapseProps} from 'antd';
 import TransformerBlueprint from "../base/TransformerBlueprint.ts";
@@ -34,29 +34,29 @@ const TransformEngineComponent = ({onChange}: Props) => {
     setEngine(prevState => TransformEngine.clone(prevState))
   }
 
-  const handleChangeTransformer = (index: number, transformer: StringTransformer) => {
-    engine.replaceTransformer(index, transformer)
-    setEngine(prevState => TransformEngine.clone(prevState))
-  }
-
-  const handleRemoveTransformer = (index: number) => {
-    engine.removeTransformer(index)
-    setEngine(prevState => TransformEngine.clone(prevState))
-  }
+  // const handleChangeTransformer = (index: number, transformer: StringTransformer) => {
+  //   engine.replaceTransformer(index, transformer)
+  //   setEngine(prevState => TransformEngine.clone(prevState))
+  // }
+  //
+  // const handleRemoveTransformer = (index: number) => {
+  //   engine.removeTransformer(index)
+  //   setEngine(prevState => TransformEngine.clone(prevState))
+  // }
 
   const onClick: MenuProps['onClick'] = ({key}) => {
     handleAddTransformer(key);
   };
 
-  const dropdownItems: MenuProps['items'] =
-    Array
-      .from(TransformerBlueprint.all().entries())
-      .map(([key, value]) => {
-        return {
-          label: value.newInstance().name(),
-          key: key,
-        }
-      })
+  // const dropdownItems: MenuProps['items'] =
+  //   Array
+  //     .from(TransformerBlueprint.all().entries())
+  //     .map(([key, value]) => {
+  //       return {
+  //         label: value.newInstance().name(),
+  //         key: key,
+  //       }
+  //     })
 
 
   const items: CollapseProps['items'] =
@@ -64,13 +64,13 @@ const TransformEngineComponent = ({onChange}: Props) => {
       return {
         key: index.toString(),
         label: transformer.name(),
-        children: <TransformerNode
-          index={index}
-          key={index.toString()}
-          transformer={transformer}
-          onChange={(index, updated) => handleChangeTransformer(index, updated)}
-          onRemove={(index) => handleRemoveTransformer(index)}
-        />,
+        // children: <TransformerNode
+        //   // index={index}
+        //   key={index.toString()}
+        //   transformer={transformer}
+        //   // onChange={(index, updated) => handleChangeTransformer(index, updated)}
+        //   // onRemove={(index) => handleRemoveTransformer(index)}
+        // />,
       }
     });
 
@@ -81,7 +81,7 @@ const TransformEngineComponent = ({onChange}: Props) => {
       <Dropdown
         menu={
           {
-            dropdownItems,
+            // dropdownItems,
             onClick
           }
         }

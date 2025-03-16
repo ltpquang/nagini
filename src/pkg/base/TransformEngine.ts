@@ -2,7 +2,7 @@ import {StringTransformer} from "./StringTransformer";
 
 class TransformEngine implements StringTransformer {
   static clone(from: TransformEngine): TransformEngine {
-    let result = new TransformEngine()
+    const result = new TransformEngine()
     result._transformers = from.transformers
     return result
   }
@@ -30,7 +30,7 @@ class TransformEngine implements StringTransformer {
 
   transformData(input: string): string {
     let result = input
-    this.transformers.forEach((trans, index, _a) => {
+    this.transformers.forEach((trans) => {
       result = trans.transformData(result)
     })
     return result

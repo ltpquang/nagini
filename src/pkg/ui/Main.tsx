@@ -1,16 +1,13 @@
 import {useEffect, useState} from "react";
 import TransformEngine from "../base/TransformEngine";
-// import TransformEngineComponent from "./TransformEngineComponent";
-import 'react-json-view-lite/dist/index.css';
 import {useSearchParams, useNavigate, useLocation} from 'react-router';
 import {JsonViewer} from "@textea/json-viewer";
-import {Container, Grid2, Collapse, Grow, Fade} from "@mui/material";
-import {InputBox} from "../../InputBox/index.tsx";
-import {TransitionGroup} from "react-transition-group";
+import {Container, Grid2, Grow} from "@mui/material";
+import {InputBox} from "../../InputBox";
 
 export const Main = () => {
   const [input, setInput] = useState<string>("");
-  const [engine, setEngine] = useState<TransformEngine>(() => new TransformEngine());
+  const [engine, _setEngine] = useState<TransformEngine>(() => new TransformEngine());
   const [output, setOutput] = useState<string>("");
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -62,7 +59,7 @@ export const Main = () => {
   const parseOutput = (output: string) => {
     try {
       return JSON.parse(output);
-    } catch (e) {
+    } catch (_e) {
       return output;
     }
   }

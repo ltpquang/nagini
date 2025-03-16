@@ -1,8 +1,8 @@
 import Unescape from "../transformers/Unescape";
 import {StringTransformer} from "./StringTransformer";
-import ReplaceText from "../transformers/ReplaceText";
-import JsonPath from "../transformers/JsonPath";
-import ReplaceRegEx from "../transformers/ReplaceRegEx";
+// import ReplaceText from "../transformers/ReplaceText";
+// import JsonPath from "../transformers/JsonPath";
+// import ReplaceRegEx from "../transformers/ReplaceRegEx";
 
 type CreateTransformerFunction = () => StringTransformer;
 
@@ -15,9 +15,9 @@ export default class TransformerBlueprint {
 
   private static allTransformers: Map<string, TransformerBlueprint> = new Map<string, TransformerBlueprint>([
     // ["jsonbeautify", new TransformerBlueprint(() => new JsonBeautify())],
-    ["jsonpath", new TransformerBlueprint(() => new JsonPath())],
-    ["replaceregex", new TransformerBlueprint(() => new ReplaceRegEx())],
-    ["replacetext", new TransformerBlueprint(() => new ReplaceText())],
+    // ["jsonpath", new TransformerBlueprint(() => new JsonPath())],
+    // ["replaceregex", new TransformerBlueprint(() => new ReplaceRegEx())],
+    // ["replacetext", new TransformerBlueprint(() => new ReplaceText())],
     ["unescape", new TransformerBlueprint(() => new Unescape())]
   ])
 

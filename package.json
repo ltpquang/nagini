@@ -16,10 +16,10 @@
     "@mui/material": "^6.4.7",
     "@textea/json-viewer": "^4.0.1",
     "antd": "^5.24.3",
+    "dirty-json": "^0.9.2",
     "jsonpath": "^1.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-json-view-lite": "^2.4.1",
     "react-router": "^7.3.0",
     "react-textarea-autosize": "^8.5.7",
     "react-transition-group": "^4.4.5"
