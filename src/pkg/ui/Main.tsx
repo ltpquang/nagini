@@ -101,7 +101,6 @@ export const Main = () => {
             />
           </Grid2>
 
-
           <Grow
             in={inputAvailable}
             style={{transformOrigin: '0 0 0'}}

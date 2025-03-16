@@ -1,4 +1,4 @@
-import {Box, TextField, TextFieldProps, Typography} from "@mui/material";
+import {Box, Stack, TextField, TextFieldProps, Typography} from "@mui/material";
 
 export type InputBoxProps = TextFieldProps;
 
@@ -42,7 +42,7 @@ export const InputBox = (props: InputBoxProps) => {
         />
         {
           inputLength === 0 && (
-            <Box
+            <Stack
               sx={{
                 position: "absolute",
                 pointerEvents: "none",
@@ -55,8 +55,9 @@ export const InputBox = (props: InputBoxProps) => {
                 alignItems: "center",
               }}
             >
+              <Typography variant="body1" sx={{color: "lightgray"}}> Paste your JSON </Typography>
               <Typography variant="h3" sx={{color: "lightgray"}}> {getShortcutText()} </Typography>
-            </Box>
+            </Stack>
           )
         }
       </Box>
