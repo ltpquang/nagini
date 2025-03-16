@@ -12,9 +12,9 @@ const theme = createTheme({
 
 function App() {
   return <ThemeProvider theme={theme}>
-    <BrowserRouter>
+    <BrowserRouter basename={"/nagini"}>
       <Routes>
-        <Route path="/nagini" element={<Main/>}/>
+        <Route path="/" element={<Main/>}/>
       </Routes>
     </BrowserRouter>
   </ThemeProvider>
