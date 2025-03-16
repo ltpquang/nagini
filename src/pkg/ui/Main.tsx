@@ -74,6 +74,7 @@ export const Main = () => {
             alignItems: "center",
             height: "100%",
             width: "100%",
+            padding: "36px 0"
           }}
         >
 
@@ -113,8 +114,7 @@ export const Main = () => {
               sx={{
                 justifyContent: "start",
                 maxHeight: "100%",
-                padding: "48px 0",
-                overflow: "auto"
+                overflow: "auto",
               }}
             >
               <JsonViewer
