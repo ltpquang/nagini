@@ -3,6 +3,8 @@ import {Box, TextField, TextFieldProps, Typography} from "@mui/material";
 export type InputBoxProps = TextFieldProps;
 
 export const InputBox = (props: InputBoxProps) => {
+  const inputLength = (props.value as string)?.length || 0;
+
   const getShortcutText = () => {
     if (navigator.platform.toLowerCase().indexOf("mac") !== -1) {
       return "⌘ + V";
@@ -28,6 +30,8 @@ export const InputBox = (props: InputBoxProps) => {
             input: {
               sx: {
                 fontFamily: 'monospace',
+                color: '#002b36',
+                opacity: 0.8,
                 maxHeight: '70vh',
                 overflow: 'auto',
                 fontSize: '13px'
@@ -37,7 +41,7 @@ export const InputBox = (props: InputBoxProps) => {
           {...props}
         />
         {
-          props.value.length === 0 && (
+          inputLength === 0 && (
             <Box
               sx={{
                 position: "absolute",

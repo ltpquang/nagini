@@ -105,27 +105,31 @@ export const Main = () => {
               }}
             />
           </Grid2>
-          <Grid2
-            size={7}
-            sx={{
-              justifyContent: "start",
-              maxHeight: "100%",
-              padding: "48px 0",
-              overflow: "auto"
-            }}
-          >
-            <JsonViewer
-              value={parseOutput(output)}
-              rootName={false}
-              displaySize={false}
-              displayDataTypes={false}
-              highlightUpdates={false}
-              editable={false}
+
+          {input.length > 0 && (
+            <Grid2
+              size={7}
               sx={{
-                whiteSpace: 'nowrap',
+                justifyContent: "start",
+                maxHeight: "100%",
+                padding: "48px 0",
+                overflow: "auto"
               }}
-            />
-          </Grid2>
+            >
+              <JsonViewer
+                value={parseOutput(output)}
+                rootName={false}
+                displaySize={false}
+                displayDataTypes={false}
+                highlightUpdates={false}
+                editable={false}
+                sx={{
+                  whiteSpace: 'nowrap',
+                }}
+              />
+            </Grid2>
+          )}
+
         </Grid2>
       </Container>
 
