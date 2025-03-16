@@ -5,7 +5,7 @@ import 'react-json-view-lite/dist/index.css';
 import {useSearchParams, useNavigate, useLocation} from 'react-router';
 import {JsonViewer} from "@textea/json-viewer";
 import {Container, Grid2, Collapse, Grow, Fade} from "@mui/material";
-import {InputBox} from "../../InputBox/index..tsx";
+import {InputBox} from "../../InputBox/index.tsx";
 import {TransitionGroup} from "react-transition-group";
 
 export const Main = () => {
