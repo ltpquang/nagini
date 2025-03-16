@@ -4,7 +4,8 @@ import TransformEngine from "../base/TransformEngine";
 import 'react-json-view-lite/dist/index.css';
 import {useSearchParams, useNavigate, useLocation} from 'react-router';
 import {JsonViewer} from "@textea/json-viewer";
-import {Box, Container, Grid, Grid2, Paper, TextField} from "@mui/material";
+import {Container, Grid2} from "@mui/material";
+import {InputBox} from "../../InputBox/index..tsx";
 
 export const Main = () => {
   const [input, setInput] = useState<string>("");
@@ -63,15 +64,6 @@ export const Main = () => {
     }
   }
 
-
-  // const getShortcutText = () => {
-  //   if (navigator.platform.toLowerCase().indexOf("mac") !== -1) {
-  //     return "⌘ + V";
-  //   } else {
-  //     return "Ctrl + V";
-  //   }
-  // }
-
   return (
     <>
       <Container
@@ -101,23 +93,8 @@ export const Main = () => {
               overflow: "auto"
             }}
           >
-            <TextField
+            <InputBox
               value={input}
-              multiline={true}
-              fullWidth={true}
-              minRows={7}
-              maxRows={14}
-              slotProps={{
-                input: {
-                  sx: {
-                    fontFamily: 'monospace',
-                    maxHeight: '70vh',
-                    overflow: 'auto',
-                    fontSize: '13px'
-
-                  }
-                }
-              }}
               onChange={(event) => setInput(event.target.value)}
               onPaste={(event) => {
                 event.preventDefault();
@@ -153,8 +130,6 @@ export const Main = () => {
       </Container>
 
 
-      {/*{input.length > 0 || <div*/}
-      {/* className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">{getShortcutText()}</div>}*/}
       {/*{output.length > 0 || <div*/}
       {/* className="textarea-placeholder noselect position-absolute top-50 start-50 translate-middle">···</div>}*/}
 
