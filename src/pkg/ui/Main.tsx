@@ -1,13 +1,10 @@
 import {useEffect, useState} from "react";
 import TransformEngine from "../base/TransformEngine";
 // import TransformEngineComponent from "./TransformEngineComponent";
-import {defaultStyles, JsonView} from 'react-json-view-lite';
 import 'react-json-view-lite/dist/index.css';
-import TextareaAutosize from 'react-textarea-autosize';
 import {useSearchParams, useNavigate, useLocation} from 'react-router';
-import {Col, Row} from "antd";
-import TextArea from "antd/es/input/TextArea";
 import {JsonViewer} from "@textea/json-viewer";
+import {Box, Container, Grid, Grid2, Paper, TextField} from "@mui/material";
 
 export const Main = () => {
   const [input, setInput] = useState<string>("");
@@ -58,24 +55,14 @@ export const Main = () => {
     setOutput(result);
   }, [engine, input])
 
-  const renderOutput = (output: string) => {
-    let obj = {}
+  const parseOutput = (output: string) => {
     try {
-      obj = JSON.parse(output);
-      return <JsonViewer value={obj}/>
-      // return <JsonView
-      //   data={obj}
-      //   shouldExpandNode={() => true}
-      //   style={defaultStyles}
-      // />
+      return JSON.parse(output);
     } catch (e) {
-      console.log(e);
-      return <JsonViewer value={output}/>
-      // return <div className="output-textarea bg-light border">
-      //   {output}
-      // </div>
+      return output;
     }
   }
+
 
   // const getShortcutText = () => {
   //   if (navigator.platform.toLowerCase().indexOf("mac") !== -1) {
@@ -87,26 +74,83 @@ export const Main = () => {
 
   return (
     <>
-      <Row>
-        <Col flex={2} style={{backgroundColor: "#f0f0f0"}}>
-          <TextArea
-            value={input}
-            autoSize={{minRows: 3, maxRows: 5}}
-            onChange={(event) => setInput(event.target.value)}
-            onPaste={(event) => {
-              event.preventDefault();
-              const paste = event.clipboardData?.getData("text");
-              if (paste) {
-                setInput(paste);
-              }
+      <Container
+        style={{
+          // backgroundColor: "lightblue",
+          width: "100%",
+          height: "100vh",
+        }}
+      >
+        <Grid2
+          container
+          columnSpacing={4}
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            width: "100%",
+          }}
+          // style={{backgroundColor: "lightyellow"}}
+        >
+          <Grid2
+            size={5}
+            sx={{
+              justifyContent: "start",
+              maxHeight: "100%",
+              padding: "48px 0",
+              overflow: "auto"
             }}
-          />
-          {/*<TransformEngineComponent onChange={setEngine}/>*/}
-        </Col>
-        <Col flex={3} style={{backgroundColor: "lightcoral"}}>
-          {renderOutput(output)}
-        </Col>
-      </Row>
+          >
+            <TextField
+              value={input}
+              multiline={true}
+              fullWidth={true}
+              minRows={7}
+              maxRows={14}
+              slotProps={{
+                input: {
+                  sx: {
+                    fontFamily: 'monospace',
+                    maxHeight: '70vh',
+                    overflow: 'auto',
+                    fontSize: '13px'
+
+                  }
+                }
+              }}
+              onChange={(event) => setInput(event.target.value)}
+              onPaste={(event) => {
+                event.preventDefault();
+                const paste = event.clipboardData?.getData("text");
+                if (paste) {
+                  setInput(paste);
+                }
+              }}
+            />
+          </Grid2>
+          <Grid2
+            size={7}
+            sx={{
+              justifyContent: "start",
+              maxHeight: "100%",
+              padding: "48px 0",
+              overflow: "auto"
+            }}
+          >
+            <JsonViewer
+              value={parseOutput(output)}
+              rootName={false}
+              displaySize={false}
+              displayDataTypes={false}
+              highlightUpdates={false}
+              editable={false}
+              sx={{
+                whiteSpace: 'nowrap',
+              }}
+            />
+          </Grid2>
+        </Grid2>
+      </Container>
 
 
       {/*{input.length > 0 || <div*/}
