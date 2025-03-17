@@ -130,7 +130,7 @@ export const Main = () => {
                 displayComma={true}
                 editable={false}
                 sx={{
-                  whiteSpace: 'nowrap',
+                  whiteSpace: 'auto',
                 }}
               />
             </Grid2>
