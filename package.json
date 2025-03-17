@@ -1,7 +1,7 @@
 {
   "name": "nagini",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0",
   "type": "module",
   "homepage": "https://ltpquang.github.io/nagini",
   "scripts": {
@@ -12,17 +12,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.6.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.7",
     "@textea/json-viewer": "^4.0.1",
-    "dirty-json": "^0.9.2",
-    "jsonpath": "^1.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router": "^7.3.0",
-    "react-textarea-autosize": "^8.5.7"
+    "react-router": "^7.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
