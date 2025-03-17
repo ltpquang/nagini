@@ -79,7 +79,7 @@ export const Main = () => {
         >
 
           <Grid2
-            // key="input"
+            key="input"
             size={5}
             sx={{
               justifyContent: "start",
