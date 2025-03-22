@@ -34,6 +34,8 @@ export const InputBox = (props: InputBoxProps) => {
                 opacity: 0.8,
                 maxHeight: '70vh',
                 overflow: 'auto',
+                scrollbarColor: "lightgray whitesmoke",
+                scrollbarWidth: 'thin',
                 fontSize: '13px'
               }
             }

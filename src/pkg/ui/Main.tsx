@@ -117,7 +117,8 @@ export const Main = () => {
                 justifyContent: "start",
                 maxHeight: "100%",
                 overflow: "auto",
-                scrollbarColor: "lightgray white",
+                scrollbarColor: "lightgray whitesmoke",
+                scrollbarWidth: "thin",
                 padding: "24px 0",
               }}
             >
