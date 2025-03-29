@@ -4,7 +4,7 @@ import {useSearchParams, useNavigate, useLocation} from 'react-router';
 import {JsonViewer} from "@textea/json-viewer";
 import {Container, Grid2, Grow} from "@mui/material";
 import {InputBox} from "../../InputBox";
-import { parse } from 'lossless-json';
+import {isInteger, parse, parseNumberAndBigInt, toSafeNumberOrThrow} from 'lossless-json';
 
 export const Main = () => {
   const [input, setInput] = useState<string>("");
@@ -57,9 +57,17 @@ export const Main = () => {
     setOutput(result);
   }, [engine, input])
 
+  const customNumberParser = (value: string) => {
+    try {
+      return toSafeNumberOrThrow(value);;
+    } catch (_) {
+      return BigInt(value);
+    }
+  }
+
   const parseOutput = (output: string) => {
     try {
-      return parse(output);
+      return parse(output, null, customNumberParser);
     } catch (_e) {
       return output;
     }
