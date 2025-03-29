@@ -4,7 +4,7 @@ import {useSearchParams, useNavigate, useLocation} from 'react-router';
 import {JsonViewer} from "@textea/json-viewer";
 import {Container, Grid2, Grow} from "@mui/material";
 import {InputBox} from "../../InputBox";
-import {isInteger, parse, parseNumberAndBigInt, toSafeNumberOrThrow} from 'lossless-json';
+import {parse, toSafeNumberOrThrow} from 'lossless-json';
 
 export const Main = () => {
   const [input, setInput] = useState<string>("");
