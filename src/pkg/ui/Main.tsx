@@ -59,7 +59,7 @@ export const Main = () => {
 
   const customNumberParser = (value: string) => {
     try {
-      return toSafeNumberOrThrow(value);;
+      return toSafeNumberOrThrow(value);
     } catch (_) {
       return BigInt(value);
     }
